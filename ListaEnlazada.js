@@ -26,10 +26,10 @@ class ListaEnlazada
 //                                         #actual cabeza
 //         self.head=nodonuevo             #La cabeza se reemplaza por el nodo nuevo
 //         self.TopBack()                  #Definir la cola nueva
-    PushFront(data)
+    PushFront(data,x,y,r)
     {
         this.size+=1;
-        let nodonuevo = new Nodo(data);
+        let nodonuevo = new Nodo(data,x,y,r);
         if(this.head==null)
         {
             this.head=nodonuevo;
@@ -89,8 +89,30 @@ class ListaEnlazada
             while (act.next!=null)
             {
                 print(act.data+' -> ');
+
+                push();
+                textSize(15);
+                fill('white');
+                stroke('black');
+                strokeWeight(1);
+                line(act.x,act.y,act.next.x,act.next.y);
+                circle(act.x,act.y,act.r);
+                fill('black');
+                text(act.data,act.x,act.y)
+                pop();
+                
                 act=act.next;
             }
+            push();
+            textSize(15);
+            fill('white');
+            stroke('black');
+            strokeWeight(1);
+            circle(act.x,act.y,act.r);
+            fill('black');
+            text(act.data,act.x,act.y)
+            pop();
+
             print(act.data+'-> null \n');
         }
         else
@@ -289,10 +311,10 @@ class ListaEnlazada
 
 //         self.head.next=nodonuevo    #Colocar el nodo nuevo despues de la cabeza
 //         self.tail=nodonuevo         #la cola es el nuevo nodo
-    PushBack(data)
+    PushBack(data,x,y,r)
     {
         this.size+=1;
-        let nodonuevo= new Nodo(data);
+        let nodonuevo= new Nodo(data,x,y,r);
 
         if(this.head==null)
         {
@@ -302,7 +324,7 @@ class ListaEnlazada
 
         if(this.tail!=null)
         {
-            this.tail.next;
+            this.tail.next=nodonuevo;
             this.tail=nodonuevo;
         }
 
