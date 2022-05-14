@@ -3,58 +3,34 @@
 class Pila extends ListaEnlazada{
 
     // #Herencia:
-    // #__init__
-    // #PushFront
-    // #Empty
-    // #Print
-    // #Find
-    // #retN
-    // #Erase
-    // def TopFront(self):                 #Retornar el primer elemento de la lista
-    //     if (self.head.data!=None):
-    //         return self.head.data
-    //     return None
-    
-    TopFront(){
-        if (this.head.data!=null)
-        {
-            return this.head.data;
-        }
-    }
+    // Constructor()            -Igual
+    // PushFront(data,x,y,r)    -Permitido
+    // TopBack()                -No permitido
+    // Empty()                  -Igual
+    // Print()                  -Igual
+    // Find()                   -No permitido
+    // retN()                   -No permitido
+    // Erase()                  -No permitido
+    // TopFront()               -Permitido
+    // PopFront()               -Permitido
+    // PushBack(data,x,y,r)     -No permitido
+    // PopBack()                -No permitido
 
-    // def PopFront(self):                 #Retornar Y Eliminar el primer elemento de la lista
-    // if(self.tail!=self.head): #Si hay mas de 1 objeto
-    //     dato=self.head.data                 #Guardar el valor
-    //     self.head=self.head.next
-    //     self.size-=1
-    //     return dato                         #Retornar el dato eliminado
-    // else:                                   #Si solo hay un objeto, retornar la cabeza
-    //     try:                                #Si el arreglo NO esta vacio:
-    //         dato=self.head.data             
-    //     except:
-    //         return 
-    //     self.head=None                      #Eliminar el arreglo
-    //     self.tail=None
-    //     self.size-=1
-    //     return dato
-    PopFront(){
-        if (this.tail!=this.head)
-        {
-            dato = this.head.data;
-            this.head = this.head.next
-            this.size -= 1
-            return dato
-        }
-        else
-        {
-            if(self.size>0)
-            {
-                this.head=null;
-                this.tail=null;
-                self.size-=1;
-                return dato;
-            }
-            return;
-        }
-    }
+    //En una pila solo podemos ingresar y sacar desde el frente. El ultimo que entra es el primero que sale (LIFO)
+    //Metodos permitidos Super trae el mismo codigo de la clase padre
+    constructor(){super();}
+    PushFront(data,x,y,r){super.PushFront(data,x,y,r);}
+    Empty(){super.Empty();}
+    Print(){super.Print();}
+    TopFront(){super.TopFront();}
+    PopFront(){super.PopFront();}
+
+    //Metodos no permitidos.
+    TopBack(){throw 'TopBack no permitido en pilas';}    
+    Find(){throw 'Find no permitido en pilas';}    
+    retN(){throw 'retN no permitido en pilas';}       
+    Erase(){throw 'Erase no permitido en pilas';}    
+    PushBack(){throw 'PushBack no permitido en pilas';}    
+    PopBack(){throw 'PopBack no permitido en pilas';}       
+
 }
