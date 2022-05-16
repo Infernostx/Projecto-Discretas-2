@@ -9,13 +9,23 @@ class Universo{
 
     Print(){
         push();
+        //Imprimir conexiones
+        for(let j=0; j<this.conexiones.length;j++){
+            line(   this.x,
+                    this.y,
+                    this.conexiones[j].x,
+                    this.conexiones[j].y);
+            this.conexiones[j].Print();
+        }
+        //Imprimir nodos
         textSize(15);
         fill('white');
         stroke('black');
         strokeWeight(1);
         circle(this.x,this.y,this.r);
         fill('black');
-        text(this.data,this.x,this.y);
+        text(this.data,this.x-(0.5*15),this.y+(0.4*15));
+    
         pop();
     }
 
@@ -39,22 +49,40 @@ class Multiverso{
         this.size++;
     }
 
+    //Un universo dependiente puede depender de varios independientes
     CrearUniversoDependiente(conexiones,data,x,y,r){
         let uni = new Universo(data,x,y,r);
         for(let i=0; i<conexiones.length;i++){
-            if(conexiones[i].conexiones.length<6){
+            if(conexiones[i].conexiones.length<this.max){
                 conexiones[i].conexiones.push(uni);
+                this.size++;
             }
             else{
-                throw "Maximo de conexiones permitidas = 6";
+                throw "Maximo de conexiones permitidas ="+this.max;
             }
         }
+    }
+
+    CrearConexion(ini,fin){
+        if(ini!=fin){
+            if(ini.conexiones.length<this.max && fin.conexiones.length<this.max){
+                ini.conexiones.push(fin);
+            }else{
+                throw "Maximo de conexiones permitidas ="+this.max;
+            }
+        }else{
+            throw "Conexion no permtida";
+        }
+    }
+
+    GenerarDependientesAleatorias(n){
+
     }
 
     Print(){
         push();
         for(let i=0; i<this.independientes.length;i++){
-            //Imprimir conexiones
+            //Imprimir conexiones (recursivo)
             for(let j=0; j<this.independientes[i].conexiones.length;j++){
                 line(   this.independientes[i].x,
                         this.independientes[i].y,
