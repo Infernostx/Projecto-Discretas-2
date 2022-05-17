@@ -8,13 +8,14 @@ function setup() {
     // test.PushFront(69,700,536,50);
     // test.PushBack(15,900,200,70);
     test = new Multiverso();
-    test.CrearUniversoIndependiente(20,windowWidth/2,windowHeight/2,50);
-    test.CrearUniversoDependiente([test.independientes[0]],1,random(70,windowWidth-70),random(70,windowHeight-70),random(30,70));
-    test.CrearUniversoDependiente([test.independientes[0]],2,random(70,windowWidth-70),random(70,windowHeight-70),random(30,70));
-    test.CrearUniversoDependiente([test.independientes[0]],3,random(70,windowWidth-70),random(70,windowHeight-70),random(30,70));
-    test.CrearUniversoDependiente([test.independientes[0]],4,random(70,windowWidth-70),random(70,windowHeight-70),random(30,70));
-    test.CrearUniversoDependiente([test.independientes[0]],5,random(70,windowWidth-70),random(70,windowHeight-70),random(30,70));
-    test.CrearUniversoDependiente([test.independientes[0]],6,random(70,windowWidth-70),random(70,windowHeight-70),random(30,70));
+    test.CrearUniversoIndependiente("Super Smash Bros",windowWidth/2,windowHeight/2,120);
+    test.CrearUniversoIndependiente("SMT",windowWidth/3,windowHeight/3,50);
+    test.CrearUniversoDependiente([test.independientes[0]],"Metroid",random(70,windowWidth-70),random(70,windowHeight-70),60);
+    test.CrearUniversoDependiente([test.independientes[0]],"The Legend of Zelda",random(70,windowWidth-70),random(70,windowHeight-70),150);
+    test.CrearUniversoDependiente([test.independientes[1]],"Persona 5",random(70,windowWidth-70),random(70,windowHeight-70),80);
+    test.CrearUniversoDependiente([test.independientes[0]],"Pokemon",random(70,windowWidth-70),random(70,windowHeight-70),70);
+    test.CrearUniversoDependiente([test.independientes[0]],"5",random(70,windowWidth-70),random(70,windowHeight-70),random(30,70));
+    test.CrearUniversoDependiente([test.independientes[0]],"6",random(70,windowWidth-70),random(70,windowHeight-70),random(30,70));
     //No permitido
     //test.CrearUniversoDependiente([test.independientes[0]],7,random(windowWidth),random(windowHeight),random(30,70));
 }

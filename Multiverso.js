@@ -13,6 +13,7 @@ class Universo{
         fill('white');
         stroke('black');
         strokeWeight(1);
+        textAlign('center');
         circle(this.x,this.y,this.r);
         fill('black');
         text(this.data,this.x,this.y);
@@ -66,6 +67,7 @@ class Multiverso{
             textSize(15);
             fill('white');
             stroke('black');
+            textAlign('center');
             strokeWeight(1);
             circle(this.independientes[i].x,this.independientes[i].y,this.independientes[i].r);
             fill('black');
