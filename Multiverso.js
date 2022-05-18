@@ -1,9 +1,19 @@
+
+// function prueba({param1 = 0, param2 = 0}={}){
+//     print(param1,param2);
+// }
+
+// prueba({param1:9});
+
 class Universo{
-    constructor(data,x,y,r){
+    constructor(data,{x=random(70,windowWidth-70),y=random(70,windowHeight-70),r=random(50,100)}){
+        //Data es un parametro obligatorio
         this.data=data;
+        //X Y R son opcionales (existen por y para el visualizador)
         this.x=x;
         this.y=y;
         this.r=r;
+        //Las conexiones del universo se definen en el multiverso
         this.conexiones=[];
     }
 
@@ -39,19 +49,22 @@ class Multiverso{
     //Solo es posible viajar en una direccion (ida)
 
     constructor(max_conexiones){
+        //Parametro obligatorio
         this.independientes=[];
+        //Atributos del multiverso    
         this.size=0;
         this.max=max_conexiones;
     }
 
-    CrearUniversoIndependiente(data,x,y,r){
-        this.independientes.push(new Universo(data,x,y,r));
+    //paramsvis hace referencia a los parametros del visualizador
+    CrearUniversoIndependiente(data,paramsvis){
+        this.independientes.push(new Universo(data,paramsvis));
         this.size++;
     }
 
     //Un universo dependiente puede depender de varios independientes
-    CrearUniversoDependiente(conexiones,data,x,y,r){
-        let uni = new Universo(data,x,y,r);
+    CrearUniversoDependiente(conexiones,data,paramsvis){
+        let uni = new Universo(data,paramsvis);
         for(let i=0; i<conexiones.length;i++){
             if(conexiones[i].conexiones.length<this.max){
                 conexiones[i].conexiones.push(uni);
@@ -63,6 +76,8 @@ class Multiverso{
         }
     }
 
+    //
+
     CrearConexion(ini,fin){
         if(ini!=fin){
             if(ini.conexiones.length<this.max && fin.conexiones.length<this.max){
@@ -73,10 +88,6 @@ class Multiverso{
         }else{
             throw "Conexion no permtida";
         }
-    }
-
-    GenerarDependientesAleatorias(n){
-
     }
 
     Print(){
