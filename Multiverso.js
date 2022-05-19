@@ -1,24 +1,24 @@
 
-// function prueba({param1 = 0, param2 = 0}={}){
-//     print(param1,param2);
-// }
-
-// prueba({param1:9});
-
 class Universo{
-    constructor(data,{x=random(70,windowWidth-70),y=random(70,windowHeight-70),r=random(50,100)}){
+    constructor(
+        data,
+        {   x=random(70,windowWidth-70),                    //Coordenada en x del nodo
+            y=random(70,windowHeight-70),                   //Coordenada en y del nodo
+            r=random(50,100),                                //Radio del nodo
+            c=random(["blue","yellow","green","black"])      //Color del nodo
+        }){
         //Data es un parametro obligatorio
         this.data=data;
         //X Y R son opcionales (existen por y para el visualizador)
         this.x=x;
         this.y=y;
         this.r=r;
+        this.c=c;
         //Las conexiones del universo se definen en el multiverso
         this.conexiones=[];
     }
 
     Print(){
-        push();
         //Imprimir conexiones
         for(let j=0; j<this.conexiones.length;j++){
             line(   this.x,
@@ -28,14 +28,14 @@ class Universo{
             this.conexiones[j].Print();
         }
         //Imprimir nodos
-        textSize(15);
-        fill('white');
-        stroke('black');
-        strokeWeight(1);
+        push();
+        fill(this.c);
         circle(this.x,this.y,this.r);
-        fill('black');
+        fill('white');
+        textSize(15);
+        stroke('black');
+        strokeWeight(2);
         text(this.data,this.x-(0.5*15),this.y+(0.4*15));
-    
         pop();
     }
 
@@ -76,8 +76,6 @@ class Multiverso{
         }
     }
 
-    //
-
     CrearConexion(ini,fin){
         if(ini!=fin){
             if(ini.conexiones.length<this.max && fin.conexiones.length<this.max){
@@ -100,15 +98,18 @@ class Multiverso{
                         this.independientes[i].conexiones[j].x,
                         this.independientes[i].conexiones[j].y);
                 this.independientes[i].conexiones[j].Print();
+
             }
             //Imprimir nodos
+            push();
+            fill(this.independientes[i].c);
+            circle(this.independientes[i].x,this.independientes[i].y,this.independientes[i].r);
+            stroke("black");
+            strokeWeight(2);
             textSize(15);
             fill('white');
-            stroke('black');
-            strokeWeight(1);
-            circle(this.independientes[i].x,this.independientes[i].y,this.independientes[i].r);
-            fill('black');
             text(this.independientes[i].data,this.independientes[i].x-(0.5*15),this.independientes[i].y+(0.4*15));
+            pop();
         }
         pop();
     }

@@ -1,7 +1,5 @@
 let test;
 
-prueba({param1:9});
-
 function setup() {
     createCanvas(windowWidth, windowHeight);
     background('tomato');
@@ -12,7 +10,7 @@ function setup() {
     test.CrearUniversoDependiente([test.independientes[0]],1,{});
     test.CrearUniversoDependiente([test.independientes[0]],2,{});
     test.CrearUniversoDependiente([test.independientes[0]],3,{});
-    test.CrearUniversoDependiente([test.independientes[0],test.independientes[1]],4,{});
+    test.CrearUniversoDependiente([test.independientes[0],test.independientes[1]],4,{c:"purple"});
     test.CrearUniversoDependiente([test.independientes[0],test.independientes[1]],5,{});
     test.CrearUniversoDependiente([test.independientes[0],test.independientes[1]],6,{});
     //No permitido
