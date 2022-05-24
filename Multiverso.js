@@ -1,4 +1,3 @@
-
 class Universo{
     constructor(
         data,
@@ -34,11 +33,6 @@ class Universo{
         fill('white');
         textSize(15);
         stroke('black');
-        strokeWeight(1);
-        textAlign('center');
-        circle(this.x,this.y,this.r);
-        fill('black');
-        text(this.data,this.x,this.y);
         strokeWeight(2);
         text(this.data,this.x-(0.5*15),this.y+(0.4*15));
         pop();
