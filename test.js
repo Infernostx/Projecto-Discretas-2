@@ -1,4 +1,5 @@
 let test;
+
 function setup() {
     createCanvas(windowWidth, windowHeight);
     background('tomato');
@@ -17,9 +18,11 @@ function setup() {
     test.CrearUniversoDependiente([test.independientes[0]],"Super Mario Bros.",random(70,windowWidth-70),random(70,windowHeight-70),110);
     test.CrearUniversoDependiente([test.independientes[0]],"Mii Costumes",random(70,windowWidth-70),random(70,windowHeight-70),random(30,70));
     //No permitido
-    //test.CrearUniversoDependiente([test.independientes[0]],7,random(windowWidth),random(windowHeight),random(30,70));
+    //test.CrearUniversoDependiente([test.independientes[0]],7,{});
+    test.CrearConexion(test.independientes[0].conexiones[2],test.independientes[0].conexiones[4])
+    test.CrearUniversoIndependiente(555,{});
 }
 
 function draw() {
     test.Print();
-} 
+}
