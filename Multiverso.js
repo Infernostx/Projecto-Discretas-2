@@ -107,7 +107,7 @@ class Multiverso{
             strokeWeight(2);
             textSize(15);
             fill('white');
-            text(this.independientes[i].data,this.independientes[i].x-(0.5*15),this.independientes[i].y+(0.4*15));
+            text(this.independientes[i].data,this.independientes[i].x-(3*15),this.independientes[i].y+(0.01*15));
             pop();
         }
         pop();
