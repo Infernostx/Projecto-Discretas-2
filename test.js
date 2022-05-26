@@ -35,3 +35,7 @@ function setup() {
 function draw() {
     test.Print();
 }
+
+function mousePressed(){
+    test.VerClicked_Multiverso();
+}

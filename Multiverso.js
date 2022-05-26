@@ -38,6 +38,20 @@ class Universo{
         pop();
     }
 
+    VerClicked_Universo(){
+        this.Clicked();
+        for(let j=0; j<this.conexiones.length;j++){
+            this.conexiones[j].VerClicked_Universo();
+        }
+    }
+
+    Clicked(){
+        let d = dist(mouseX,mouseY,this.x,this.y);
+        if (d<this.r/2){
+            print(this.data);
+        }
+    }
+
 }
 
 
@@ -112,6 +126,15 @@ class Multiverso{
         }
         pop();
     }
+
+    VerClicked_Multiverso(){
+        for(let i=0; i<this.independientes.length;i++){
+            this.independientes[i].Clicked();
+            for(let j=0; j<this.independientes[i].conexiones.length;j++){
+                this.independientes[i].conexiones[j].VerClicked_Universo();
+            }
+    }
+}
 
 
 }
