@@ -38,22 +38,34 @@ class Universo{
         pop();
     }
 
-    VerClicked_Universo(){
-        this.Clicked();
+    VerClicked_Universo(test){
+        this.Clicked(test);
         for(let j=0; j<this.conexiones.length;j++){
             this.conexiones[j].VerClicked_Universo();
         }
     }
 
-    Clicked(){
+    Clicked(multiverso){
         let d = dist(mouseX,mouseY,this.x,this.y);
         if (d<this.r/2){
-            print(this.data);
+            //Añadir el universo tocado a la lista de recorrido
+            if(multiverso.viaje.size==0){
+                multiverso.viaje.PushBack(this);
+            }
+            else{
+                if(!(multiverso.viaje.size==1 && multiverso.viaje.head.data==this)){
+                    //TODO -  VERIFICAR QUE EL NODO QUE SE QUIERE A;ADIR ESTE EN LAS
+                    //CONEXIONES DEL ANTERIOR
+                    //ELIMINAR REPETIDOS
+                    //CONFIRMAR BESTO ESTRUCTURA DEL VIAJE
+                        multiverso.viaje.PushBack(this);
+
+                }
+            } 
         }
     }
 
 }
-
 
 class Multiverso{
 
@@ -67,6 +79,8 @@ class Multiverso{
         //Atributos del multiverso    
         this.size=0;
         this.max=max_conexiones;
+        //Variable usada para la simulacion de viaje
+        this.viaje = new ListaEnlazada();
     }
 
     //paramsvis hace referencia a los parametros del visualizador
@@ -127,11 +141,11 @@ class Multiverso{
         pop();
     }
 
-    VerClicked_Multiverso(){
+    VerClicked_Multiverso(test){
         for(let i=0; i<this.independientes.length;i++){
-            this.independientes[i].Clicked();
+            this.independientes[i].Clicked(test);
             for(let j=0; j<this.independientes[i].conexiones.length;j++){
-                this.independientes[i].conexiones[j].VerClicked_Universo();
+                this.independientes[i].conexiones[j].VerClicked_Universo(test);
             }
     }
 }

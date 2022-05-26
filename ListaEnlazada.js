@@ -88,32 +88,10 @@ class ListaEnlazada
             let act=this.head;
             while (act.next!=null)
             {
-                print(act.data+' -> ');
-
-                push();
-                textSize(15);
-                fill('white');
-                stroke('black');
-                strokeWeight(1);
-                line(act.x,act.y,act.next.x,act.next.y);
-                circle(act.x,act.y,act.r);
-                fill('black');
-                text(act.data,act.x,act.y)
-                pop();
-                
+                print(act.data.data+' -> ');
                 act=act.next;
             }
-            push();
-            textSize(15);
-            fill('white');
-            stroke('black');
-            strokeWeight(1);
-            circle(act.x,act.y,act.r);
-            fill('black');
-            text(act.data,act.x,act.y)
-            pop();
-
-            print(act.data+'-> null \n');
+            print(act.data.data+'-> null \n');
         }
         else
         {
@@ -321,7 +299,6 @@ class ListaEnlazada
             this.head=nodonuevo;
             return;
         }
-
         if(this.tail!=null)
         {
             this.tail.next=nodonuevo;

@@ -26,10 +26,6 @@ function setup() {
 
     test.CrearUniversoDependiente([test.independientes[1]],"BioShock",{x: windowWidth/1.2,y: windowHeight/2,r: 70,c:"yellow"});
     test.CrearUniversoDependiente([test.independientes[1].conexiones[1]],"Borderlands",{x: windowWidth/1.3,y: windowHeight/1.5,r: 70,c:"green"});
-    //test for an input
-    //<input type='text' id='id1' />
-    //document.getElementById('id1').value='text to be displayed' ; 
-    //test.CrearUniversoDependiente([test.independientes[1]],555,{c:"green"});
 }
 
 function draw() {
@@ -37,5 +33,5 @@ function draw() {
 }
 
 function mousePressed(){
-    test.VerClicked_Multiverso();
+    test.VerClicked_Multiverso(test);
 }
