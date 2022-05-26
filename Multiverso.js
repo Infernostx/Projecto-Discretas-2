@@ -18,16 +18,20 @@ class Universo {
         this.conexiones = [];
     }
 
-    Print(col,sw) {
+    Print(col,sw,hov) {
         //Imprimir conexiones
         for (let j = 0; j < this.conexiones.length; j++) {
             stroke(col);
-            //strokeWeight(sw);
+            strokeWeight(sw);
             line(this.x,
                 this.y,
                 this.conexiones[j].x,
                 this.conexiones[j].y);
-            this.conexiones[j].Print(col);
+            if(!hov){
+                strokeWeight(7);
+                this.conexiones[j].Print(col,sw,false);
+                
+            }
         }
         //Imprimir nodos
         push();
@@ -40,6 +44,7 @@ class Universo {
         stroke('black');
         strokeWeight(2);
         text(this.data, this.x - (this.r * 0.333), this.y + (this.r * 0.0314));
+        //Image(this.data, this.x - (this.r * 0.333), this.y + (this.r * 0.0314))
         pop();
     }
 
@@ -68,7 +73,7 @@ class Universo {
         if (d < this.r / 2) {
             //Highlight de los caminos referentes al nodo
             //erase();
-            this.Print('white',7);
+            this.Print('white',7,true)
             //noErase()
             
             
@@ -125,18 +130,20 @@ class Multiverso {
         }
     }
 
-    Print(col,sw) {
+    Print(col,sw,hov) {
         push();
         for (let i = 0; i < this.independientes.length; i++) {
             //Imprimir conexiones (recursivo)
             for (let j = 0; j < this.independientes[i].conexiones.length; j++) {
                 stroke(col);
-                //strokeWeight(sw);
+                strokeWeight(sw);
                 line(this.independientes[i].x,
                     this.independientes[i].y,
                     this.independientes[i].conexiones[j].x,
                     this.independientes[i].conexiones[j].y);
-                this.independientes[i].conexiones[j].Print(col);
+                if(!hov){
+                    this.independientes[i].conexiones[j].Print(col,sw,false);
+                }
 
             }
             //Imprimir nodos
@@ -149,7 +156,9 @@ class Multiverso {
             strokeWeight(2);
             textSize(this.independientes[i].r * 0.17333);
             fill('white');
-            text(this.independientes[i].data, this.independientes[i].x - (this.independientes[i].r * 0.333), this.independientes[i].y + (this.independientes[i].r * 0.0314));
+            //text(this.independientes[i].data, this.independientes[i].x - (this.independientes[i].r * 0.333), this.independientes[i].y + (this.independientes[i].r * 0.0314));
+            //new Image('media/ssbu.png', this.independientes[i].x - (this.independientes[i].r * 0.333), this.independientes[i].y + (this.independientes[i].r * 0.0314));
+            image(this.independientes[i].data, this.independientes[i].x - (this.independientes[i].r * 0.333), this.independientes[i].y + (this.independientes[i].r * 0.0314));
             pop();
         }
         pop();
