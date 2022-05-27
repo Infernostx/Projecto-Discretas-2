@@ -1,12 +1,15 @@
 let test;
 let img;
 let img2;
+let bg;
 let exportlvl;
 
 function preload() {
+    soundFormats('mp3');
     img = loadImage('media/ssbu.png');
     img2 = loadImage('media/drawImage.png');
-    bg = loadImage()
+    bg = loadImage('media/bg.jpg');
+    bgm = song = loadSound('media/Neco-Arc-sound-effect.mp3');
 }
 
 function setup() {
@@ -15,7 +18,8 @@ function setup() {
     exportlvl = createButton('Fin viaje');
     exportlvl.position(100, 300);
     exportlvl.mouseClicked(e);
-    
+    timingtxt = createElement('p', " ");
+    timingtxt.position(0, windowHeight*0.5);
 
     test = new Multiverso(6);
     test.CrearUniversoIndependiente("Super \n Smash Bros", { x: windowWidth / 2, y: windowHeight / 2, r: 100, c: "blue" });
@@ -47,17 +51,18 @@ function setup() {
 
 function draw() {
     clear();
-    background('tomato');
+    background(bg); 
     test.VerHover_Multiverso();
     test.Print("black",1,false);
+    text(test.viaje.Print(), 50, 20);
 }
 
 function e(){
     test.VerKeypressed_Multiverso(test, 27);
 }
 function mousePressed() {
+    bgm.play();
     test.VerClicked_Multiverso(test);
-    
     //image(img2,0, 0);
 }
 function keyPressed(){
