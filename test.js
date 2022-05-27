@@ -5,7 +5,7 @@ let img2;
 function preload() {
     img = loadImage('media/ssbu.png');
     img2 = loadImage('media/drawImage.png');
-  }
+}
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
@@ -13,8 +13,8 @@ function setup() {
     
 
     test = new Multiverso(6);
-    test.CrearUniversoIndependiente(img, { x: windowWidth / 2, y: windowHeight / 2, r: 100, c: "blue" });
-    test.CrearUniversoIndependiente(img2, { x: windowWidth / 1.3, y: windowHeight / 3.5, r: 100, c: "blue" });
+    test.CrearUniversoIndependiente("Super \n Smash Bros", { x: windowWidth / 2, y: windowHeight / 2, r: 100, c: "blue" });
+    test.CrearUniversoIndependiente("Playstation \n All Stars", { x: windowWidth / 1.3, y: windowHeight / 3.5, r: 100, c: "blue" });
     //main smash
     test.CrearUniversoDependiente([test.independientes[0], test.independientes[1]], "Metal Gear Solid", { x: windowWidth / 1.6, y: windowHeight / 2.2, r: 70, c: "yellow" });
     test.CrearUniversoDependiente([test.independientes[0]], "Persona 5", { x: windowWidth / 1.8, y: windowHeight / 3.3, r: 70, c: "yellow" });
@@ -45,11 +45,10 @@ function draw() {
     background('tomato');
     test.VerHover_Multiverso();
     test.Print("black",1,false);
-    
-    
+
 }
 
 function mousePressed() {
-    test.VerClicked_Multiverso();
+    test.VerClicked_Multiverso(test);
     //image(img2,0, 0);
 }

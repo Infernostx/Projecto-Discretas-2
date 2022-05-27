@@ -1,5 +1,6 @@
 
 class Universo {
+
     constructor(
         data,
         { x = random(70, windowWidth - 70),                    //Coordenada en x del nodo
@@ -48,13 +49,6 @@ class Universo {
         pop();
     }
 
-    VerClicked_Universo() {
-        this.Clicked();
-        for (let j = 0; j < this.conexiones.length; j++) {
-            this.conexiones[j].VerClicked_Universo();
-        }
-    }
-
     VerHover_Universo() {
         this.Hover();
         for (let j = 0; j < this.conexiones.length; j++) {
@@ -67,10 +61,17 @@ class Universo {
         if (d < this.r / 2) {
             //Highlight de los caminos referentes al nodo
             //erase();
-            this.Print('white',7,true)
+            this.Print('purple',7,true)
             //noErase()
-            
-            
+        }
+    }
+
+    ////////////////////////////////////////////////////////////
+
+    VerClicked_Universo(multiverso) {
+        this.Clicked(multiverso); 
+        for (let j = 0; j < this.conexiones.length; j++) {
+            this.conexiones[j].VerClicked_Universo(multiverso);
         }
     }
 
@@ -81,16 +82,21 @@ class Universo {
             if(multiverso.viaje.size==0){
                 multiverso.viaje.PushBack(this);
             }
-            else{
-                if(!(multiverso.viaje.size==1 && multiverso.viaje.head.data==this)){
-                    //TODO -  VERIFICAR QUE EL NODO QUE SE QUIERE A;ADIR ESTE EN LAS
-                    //CONEXIONES DEL ANTERIOR
-                    //ELIMINAR REPETIDOS
-                    //CONFIRMAR BESTO ESTRUCTURA DEL VIAJE
+            else if (multiverso.viaje.size==1){
+                if(multiverso.viaje.head.data!=this){
+                    if(multiverso.viaje.head.data.conexiones.includes(this)){
                         multiverso.viaje.PushBack(this);
-
+                    }
+                    
                 }
-            } 
+            }
+            else{
+                if(multiverso.viaje.tail.data!=this){
+                    if(multiverso.viaje.tail.data.conexiones.includes(this)){
+                        multiverso.viaje.PushBack(this);
+                    }
+                }
+            }
         }
     }
 
@@ -170,19 +176,19 @@ class Multiverso {
             strokeWeight(2);
             textSize(this.independientes[i].r * 0.17333);
             fill('white');
-            //text(this.independientes[i].data, this.independientes[i].x - (this.independientes[i].r * 0.333), this.independientes[i].y + (this.independientes[i].r * 0.0314));
+            text(this.independientes[i].data, this.independientes[i].x - (this.independientes[i].r * 0.333), this.independientes[i].y + (this.independientes[i].r * 0.0314));
             //new Image('media/ssbu.png', this.independientes[i].x - (this.independientes[i].r * 0.333), this.independientes[i].y + (this.independientes[i].r * 0.0314));
-            image(this.independientes[i].data, this.independientes[i].x - (this.independientes[i].r * 0.333), this.independientes[i].y + (this.independientes[i].r * 0.0314));
+            //image(this.independientes[i].data, this.independientes[i].x - (this.independientes[i].r * 0.333), this.independientes[i].y + (this.independientes[i].r * 0.0314));
             pop();
         }
         pop();
     }
 
-    VerClicked_Multiverso(test){
+    VerClicked_Multiverso(multiverso){
         for(let i=0; i<this.independientes.length;i++){
-            this.independientes[i].Clicked(test);
+            this.independientes[i].Clicked(multiverso);
             for(let j=0; j<this.independientes[i].conexiones.length;j++){
-                this.independientes[i].conexiones[j].VerClicked_Universo(test);
+                this.independientes[i].conexiones[j].VerClicked_Universo(multiverso);
             }
     }
 }
@@ -195,5 +201,4 @@ class Multiverso {
             }
         }
     }
-
 }
