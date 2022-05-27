@@ -1,6 +1,7 @@
 let test;
 let img;
 let img2;
+let exportlvl;
 
 let ancho,alto;
 
@@ -13,16 +14,16 @@ let viaje;
 function preload() {
     img = loadImage('media/ssbu.png');
     img2 = loadImage('media/drawImage.png');
+    bg = loadImage()
 }
 
-
 function setup() {
-    //Config de la ventana
-    ancho = windowWidth;
-    alto = windowHeight;
-    canvas = createCanvas(ancho, alto);
-    frameRate(30);
-
+    createCanvas(windowWidth, windowHeight);
+    background('tomato');
+    exportlvl = createButton('Fin viaje');
+    exportlvl.position(100, 300);
+    exportlvl.mouseClicked(e);
+    
     //Incializacion del multiverso 
     test = new Multiverso(6);
     test.CrearUniversoIndependiente("Super \n Smash Bros", { x: ancho / 2, y: alto / 2, r: 100, c: "blue" });
@@ -61,7 +62,14 @@ function draw() {
     test.Print("black",1,false);
 }
 
+function e(){
+    test.VerKeypressed_Multiverso(test, 27);
+}
 function mousePressed() {
     test.VerClicked_Multiverso(test);
+    
     //image(img2,0, 0);
+}
+function keyPressed(){
+    test.VerKeypressed_Multiverso(test,keyCode);
 }
