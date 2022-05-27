@@ -3,8 +3,8 @@ class Universo {
 
     constructor(
         data,
-        { x = random(70, windowWidth - 70),                    //Coordenada en x del nodo
-            y = random(70, windowHeight - 70),                   //Coordenada en y del nodo
+        { x = random(70, ancho - 70),                    //Coordenada en x del nodo
+            y = random(70, alto - 70),                   //Coordenada en y del nodo
             r = random(50, 100),                                //Radio del nodo
             c = random(["blue", "yellow", "green", "black"])      //Color del nodo
         }) {
