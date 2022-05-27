@@ -61,10 +61,25 @@ class Universo {
         if (d < this.r / 2) {
             //Highlight de los caminos referentes al nodo
             //erase();
-            this.Print('purple',7,true)
+            this.Print('purple',7,true);
             //noErase()
         }
     }
+
+    Keypressed(multiverso,key) {
+        if(multiverso.viaje.size>0){
+        switch(key){
+            case (27):
+                print("Tu viaje ha sido de " + multiverso.viaje.size + " franqucicias");
+                delete (multiverso.viaje);
+                multiverso.viaje = new ListaEnlazada();
+                break;
+        }
+    }
+
+        }
+    
+
 
     ////////////////////////////////////////////////////////////
 
@@ -97,9 +112,16 @@ class Universo {
                     }
                 }
             }
+            text(multiverso.viaje.Print(),50,20);
         }
     }
-
+    
+    VerKeypressed_Universo(multiverso,key) {
+        this.Keypressed(multiverso,key);
+        for (let j = 0; j < this.conexiones.length; j++) {
+            this.conexiones[j].VerKeypressed_Universo(multiverso,key);
+        }
+    }
 }
 
 class Multiverso {
@@ -185,7 +207,7 @@ class Multiverso {
     }
 
     VerClicked_Multiverso(multiverso){
-        for(let i=0; i<this.independientes.length;i++){
+        for(let i=0; i<this.independientes.length;i++){ 
             this.independientes[i].Clicked(multiverso);
             for(let j=0; j<this.independientes[i].conexiones.length;j++){
                 this.independientes[i].conexiones[j].VerClicked_Universo(multiverso);
@@ -198,6 +220,15 @@ class Multiverso {
             this.independientes[i].Hover();
             for (let j = 0; j < this.independientes[i].conexiones.length; j++) {
                 this.independientes[i].conexiones[j].VerHover_Universo();
+            }
+        }
+    }
+
+    VerKeypressed_Multiverso(multiverso,key) {
+        for (let i = 0; i < this.independientes.length; i++) {
+            this.independientes[i].Keypressed(multiverso,key);
+            for (let j = 0; j < this.independientes[i].conexiones.length; j++) {
+                this.independientes[i].conexiones[j].VerKeypressed_Universo(multiverso,key);
             }
         }
     }

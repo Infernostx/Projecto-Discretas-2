@@ -1,15 +1,20 @@
 let test;
 let img;
 let img2;
+let exportlvl;
 
 function preload() {
     img = loadImage('media/ssbu.png');
     img2 = loadImage('media/drawImage.png');
+    bg = loadImage()
 }
 
 function setup() {
     createCanvas(windowWidth, windowHeight);
     background('tomato');
+    exportlvl = createButton('Fin viaje');
+    exportlvl.position(100, 300);
+    exportlvl.mouseClicked(e);
     
 
     test = new Multiverso(6);
@@ -45,10 +50,16 @@ function draw() {
     background('tomato');
     test.VerHover_Multiverso();
     test.Print("black",1,false);
-
 }
 
+function e(){
+    test.VerKeypressed_Multiverso(test, 27);
+}
 function mousePressed() {
     test.VerClicked_Multiverso(test);
+    
     //image(img2,0, 0);
+}
+function keyPressed(){
+    test.VerKeypressed_Multiverso(test,keyCode);
 }
