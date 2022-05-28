@@ -107,7 +107,7 @@ class Universo {
                     viajerr.html("<i>No puedes viajar al mismo universo!</i>");
                 }
             }
-            if(this.conexiones.length==0){
+            if(multiverso.viaje.tail.data.conexiones.length==0){
                 viajerr.html("<i>Universo sin salida!</i>");
             }
             text(multiverso.viaje.Print(),50,20);
