@@ -6,7 +6,8 @@ class Universo {
         { x = random(70, ancho - 70),                    //Coordenada en x del nodo
             y = random(70, alto - 70),                   //Coordenada en y del nodo
             r = random(50, 100),                                //Radio del nodo
-            c = random(["blue", "yellow", "green", "black"])      //Color del nodo
+            c = random(["blue", "yellow", "green", "black"]),      //Color del nodo
+            img = tst
         }) {
         //Data es un parametro obligatorio
         this.data = data;
@@ -15,6 +16,7 @@ class Universo {
         this.y = y;
         this.r = r;
         this.c = c;
+        this.img = img;
         //Las conexiones del universo se definen en el multiverso
         this.conexiones = [];
     }
@@ -44,8 +46,9 @@ class Universo {
         textSize(this.r * 0.17333);
         stroke('black');
         strokeWeight(2);
+        image(this.img, this.x - (this.r * 0.5), this.y - (this.r * 0.5), this.r * cos(2 * PI), this.r * sin(360), this.img.x, this.img.y)
         text(this.data, this.x - (this.r * 0.333), this.y + (this.r * 0.0314));
-        //Image(this.data, this.x - (this.r * 0.333), this.y + (this.r * 0.0314))
+        
         pop();
     }
 
@@ -89,10 +92,10 @@ class Universo {
                         multiverso.viaje.PushBack(this);
                         viajerr.html("<i></i>");
                     }else{
-                        viajerr.html("<i>Los universos no estan conectados!</i>");
+                        viajerr.html("<i>Los universos no<br>estan conectados!</i>");
                     }
                 }else{
-                    viajerr.html("<i>No puedes viajar al mismo universo!</i>");
+                    viajerr.html("<i>No puedes viajar <br>al mismo universo!</i>");
                 }
             }
             else{
@@ -101,14 +104,14 @@ class Universo {
                         multiverso.viaje.PushBack(this);
                         viajerr.html("<i></i>");
                     }else{
-                        viajerr.html("<i>Los nodos no estan conectados!</i>");
+                        viajerr.html("<i>Los universos no <br>estan conectados!</i>");
                     }
                 }else{
-                    viajerr.html("<i>No puedes viajar al mismo universo!</i>");
+                    viajerr.html("<i>No puedes viajar <br>al mismo universo!</i>");
                 }
             }
             if(multiverso.viaje.tail.data.conexiones.length==0){
-                viajerr.html("<i>Universo sin salida!</i>");
+                viajerr.html("<i>Universo sin <br>      salida!</i>");
             }
             text(multiverso.viaje.Print(),50,20);
         }
@@ -185,6 +188,7 @@ class Multiverso {
             stroke(col);
             strokeWeight(sw);
             circle(this.independientes[i].x, this.independientes[i].y, this.independientes[i].r);
+            image(this.independientes[i].img, this.independientes[i].x - (this.independientes[i].r * 0.5), this.independientes[i].y - (this.independientes[i].r * 0.5), this.independientes[i].r * cos(2 * PI), this.independientes[i].r * sin(360), this.independientes[i].img.x, this.independientes[i].img.y)
             stroke('black');
             strokeWeight(2);
             textSize(this.independientes[i].r * 0.17333);
