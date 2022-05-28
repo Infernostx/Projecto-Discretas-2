@@ -1,7 +1,7 @@
 let test;
 let img;
 let img2;
-let exportlvl;
+
 
 let ancho,alto;
 
@@ -10,19 +10,39 @@ let canvas;
 let titulo;
 let nombres;
 let viaje;
+let visviaje;
+let finviaje;
+let viajerr;
 
-function preload() {
-    img = loadImage('media/ssbu.png');
-    img2 = loadImage('media/drawImage.png');
-    bg = loadImage()
-}
+// function preload() {
+//     img = loadImage('media/ssbu.png');
+//     img2 = loadImage('media/drawImage.png');
+//     bg = loadImage()
+// }
 
 function setup() {
-    createCanvas(windowWidth, windowHeight);
+    ancho=windowWidth;
+    alto=windowHeight;
+    canvas = createCanvas(ancho, alto);
+    canvas.position(0,0);
     background('tomato');
-    exportlvl = createButton('Fin viaje');
-    exportlvl.position(100, 300);
-    exportlvl.mouseClicked(e);
+
+    //Elementos DOM
+    
+    titulo=createElement("h2","DSG4- The Data Structure of Multiverse");
+    titulo.position(ancho*0.01,alto*0.01);
+    nombres=createElement("p","Santiago Reyes <br> Miguel Suárez <br> Nicolas Machado <br> Andrés Poveda");
+    nombres.position(ancho*0.01,alto*0.08);
+    viaje=createElement("h3","Viaje actual");
+    viaje.position(ancho*0.01,alto*0.2);
+    visviaje=createElement("p","");
+    visviaje.position(ancho*0.01,alto*0.25);
+    finviaje = createButton('Finalizar viaje');
+    finviaje.position(ancho*0.085, alto*0.225);
+    finviaje.mouseClicked(SimularEsc);
+    viajerr=createElement("p","<i></i>");
+    viajerr.position(ancho*0.16, alto*0.205);
+
     
     //Incializacion del multiverso 
     test = new Multiverso(6);
@@ -60,16 +80,18 @@ function draw() {
     largo = windowHeight;
     test.VerHover_Multiverso();
     test.Print("black",1,false);
+    visviaje.html(test.viaje.Print());
+    
 }
 
-function e(){
-    test.VerKeypressed_Multiverso(test, 27);
+function SimularEsc(){
+    test.Keypressed_Multiverso(test, 27);
 }
+
 function mousePressed() {
-    test.VerClicked_Multiverso(test);
-    
+    test.VerClicked_Multiverso(test);   
     //image(img2,0, 0);
 }
 function keyPressed(){
-    test.VerKeypressed_Multiverso(test,keyCode);
+    test.Keypressed_Multiverso(test,keyCode);
 }

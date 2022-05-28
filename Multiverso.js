@@ -66,21 +66,6 @@ class Universo {
         }
     }
 
-    Keypressed(multiverso,key) {
-        if(multiverso.viaje.size>0){
-        switch(key){
-            case (27):
-                print("Tu viaje ha sido de " + multiverso.viaje.size + " franqucicias");
-                delete (multiverso.viaje);
-                multiverso.viaje = new ListaEnlazada();
-                break;
-        }
-    }
-
-        }
-    
-
-
     ////////////////////////////////////////////////////////////
 
     VerClicked_Universo(multiverso) {
@@ -96,30 +81,36 @@ class Universo {
             //Añadir el universo tocado a la lista de recorrido
             if(multiverso.viaje.size==0){
                 multiverso.viaje.PushBack(this);
+                viajerr.html("<i></i>");
             }
             else if (multiverso.viaje.size==1){
                 if(multiverso.viaje.head.data!=this){
                     if(multiverso.viaje.head.data.conexiones.includes(this)){
                         multiverso.viaje.PushBack(this);
+                        viajerr.html("<i></i>");
+                    }else{
+                        viajerr.html("<i>Los universos no estan conectados!</i>");
                     }
-                    
+                }else{
+                    viajerr.html("<i>No puedes viajar al mismo universo!</i>");
                 }
             }
             else{
                 if(multiverso.viaje.tail.data!=this){
                     if(multiverso.viaje.tail.data.conexiones.includes(this)){
                         multiverso.viaje.PushBack(this);
+                        viajerr.html("<i></i>");
+                    }else{
+                        viajerr.html("<i>Los nodos no estan conectados!</i>");
                     }
+                }else{
+                    viajerr.html("<i>No puedes viajar al mismo universo!</i>");
                 }
             }
+            if(this.conexiones.length==0){
+                viajerr.html("<i>Universo sin salida!</i>");
+            }
             text(multiverso.viaje.Print(),50,20);
-        }
-    }
-    
-    VerKeypressed_Universo(multiverso,key) {
-        this.Keypressed(multiverso,key);
-        for (let j = 0; j < this.conexiones.length; j++) {
-            this.conexiones[j].VerKeypressed_Universo(multiverso,key);
         }
     }
 }
@@ -224,12 +215,16 @@ class Multiverso {
         }
     }
 
-    VerKeypressed_Multiverso(multiverso,key) {
-        for (let i = 0; i < this.independientes.length; i++) {
-            this.independientes[i].Keypressed(multiverso,key);
-            for (let j = 0; j < this.independientes[i].conexiones.length; j++) {
-                this.independientes[i].conexiones[j].VerKeypressed_Universo(multiverso,key);
+    Keypressed_Multiverso(multiverso,key) {
+        if(multiverso.viaje.size>0){
+            switch(key){
+                case (27):
+                    alert("Has viajado a través de " + multiverso.viaje.size + " franquicias");
+                    delete (multiverso.viaje);
+                    multiverso.viaje = new ListaEnlazada();
+                    viajerr.html("<i></i>");
+                    break;
             }
-        }
     }
+}
 }

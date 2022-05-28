@@ -85,18 +85,22 @@ class ListaEnlazada
     {
         if(this.head!=null)
         {
+            let txt="";
             let act=this.head;
             while (act.next!=null)
             {
                 print(act.data.data+' -> ');
+                txt+=act.data.data+"<br>";
                 act=act.next;
             }
+            txt+=act.data.data;
             print(act.data.data+'-> null \n');
+            return txt;
         }
         else
         {
             print("El arreglo esta vacio");
-            return;
+            return "Vacio";
         }
     }
 
