@@ -72,7 +72,7 @@ function setup() {
     sel = createSelect();
     sel.position(ancho*0.1,alto*0.51);
     sel.option('SSB');
-    sel.option('PAS');
+    sel.option('PAS'); 
     sel.changed(UnivMadre);
     CrearUni = createButton('Crear Universo');
     CrearUni.position(ancho*0.137,alto*0.55);
