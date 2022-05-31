@@ -102,7 +102,7 @@ function setup() {
     test.CrearUniversoDependiente([test.independientes[1]], "BioShock", { x: ancho / 1.2, y: alto / 2, r: 70, c: "yellow", img:img14 });
     test.CrearUniversoDependiente([test.independientes[1].conexiones[1]], "Borderlands", { x: ancho / 1.3, y: alto / 1.5, r: 70, c: "green", img:img13 });
 
-    //test.BorrarUniverso(test.independientes[0],5);
+    test.BorrarUniverso(test.independientes[0],5);
 }
 
 function draw() {
@@ -124,7 +124,7 @@ function draw() {
 
 function UniNuevo() {
     UniNombre = this.value();
-  }
+}
 function UnivMadre() {
     let item = sel.value();
     num = 1;
