@@ -1,7 +1,7 @@
 
-// class Lista():
+// class ListaEnlazada():
 
-class Lista
+class ListaEnlazada
 {
 
 //     def __init__(self):     #Inicializar la lista. (vacia)
@@ -26,10 +26,10 @@ class Lista
 //                                         #actual cabeza
 //         self.head=nodonuevo             #La cabeza se reemplaza por el nodo nuevo
 //         self.TopBack()                  #Definir la cola nueva
-    PushFront(data)
+    PushFront(data,x,y,r)
     {
         this.size+=1;
-        let nodonuevo = new Nodo(data);
+        let nodonuevo = new Nodo(data,x,y,r);
         if(this.head==null)
         {
             this.head=nodonuevo;
@@ -46,11 +46,6 @@ class Lista
 //         act=act.next    
 //     self.tail=act                            #Avanzamos al nodo siguiente
 //     return act.data
-
-//     def Empty(self):                    #La lista esta vacia? (V/F)
-//         if(self.size==0):
-//             return True
-//         return False
     TopBack()
     {
         let act=this.head;
@@ -62,6 +57,10 @@ class Lista
         return act.data;
     }
 
+//     def Empty(self):                    #La lista esta vacia? (V/F)
+//         if(self.size==0):
+//             return True
+//         return False
     Empty()
     {
         if(this.size==0)
@@ -86,18 +85,22 @@ class Lista
     {
         if(this.head!=null)
         {
+            let txt="";
             let act=this.head;
             while (act.next!=null)
             {
-                print(act.data+' -> ');
+                print(act.data.data+' -> ');
+                txt+=act.data.data+"<br>";
                 act=act.next;
             }
-            print(act.data+'-> null \n');
+            txt+=act.data.data;
+            print(act.data.data+'-> null \n');
+            return txt;
         }
         else
         {
             print("El arreglo esta vacio");
-            return;
+            return "Vacio";
         }
     }
 
@@ -200,7 +203,7 @@ class Lista
         else if(n==this.size-1)
         {
             this.PopBack();
-            return;88888
+            return;
         }
         else if (n>0 && n<this.size-1)
         {
@@ -227,7 +230,6 @@ class Lista
 //     if (self.head.data!=None):
 //         return self.head.data
 //     return None
-
     TopFront()
     {
         if(this.head!=null)
@@ -252,7 +254,6 @@ class Lista
 //         self.tail=None
 //         self.size-=1
 //         return dato
-
     PopFront()
     {
         let dato=this.head.data;
@@ -292,15 +293,28 @@ class Lista
 
 //         self.head.next=nodonuevo    #Colocar el nodo nuevo despues de la cabeza
 //         self.tail=nodonuevo         #la cola es el nuevo nodo
+    PushBack(data,x,y,r)
+    {
+        this.size+=1;
+        let nodonuevo= new Nodo(data,x,y,r);
 
-    PushBack()
+        if(this.head==null)
+        {
+            this.head=nodonuevo;
+            return;
+        }
+        if(this.tail!=null)
+        {
+            this.tail.next=nodonuevo;
+            this.tail=nodonuevo;
+        }
 
-// def TopBack(self):                  #Retornar el ultimo elemento de la lista
-//     act=self.head                   #Iniciar en la cabeza del arreglo   
-//     while act.next!=None:           #Mientras que no estemos en la cola del arreglo:
-//         act=act.next    
-//     self.tail=act                            #Avanzamos al nodo siguiente
-//     return act.data
+        else
+        {
+            this.head.next=nodonuevo;
+            this.tail=nodonuevo;
+        }
+    }
 
 // def PopBack(self):                  #Retornar Y Eliminar el ultimo elemento de la lista
 //     if(self.tail!=None and self.tail!=self.head): #Si hay mas de 1 objeto
@@ -322,31 +336,31 @@ class Lista
 //         self.tail=None
 //         self.size-=1
 //         return dato
-
-// def AddBefore(self,data1,data2):
-//     pos=self.FindN(data1)
-//     if(pos!=None):
-//         nodonuevo=Nodo(data2)
-//         act=self.head                   #Iniciar en la cabeza del arreglo   
-//         while act.next!=pos:           #Mientras que no estemos en la cola del arreglo:
-//             act=act.next  
-//         point=act.next  
-//         act.next=nodonuevo
-//         nodonuevo.next=point
-//     else:
-//         print("Add Before > Ese valor no existe en la lista")
-
-// def AddAfter(self,data1,data2):
-//     pos=self.FindN(data1)
-//             if(pos!=None):
-//                 nodonuevo=Nodo(data2)
-//                 act=self.head                   #Iniciar en la cabeza del arreglo   
-//                 while act.next!=pos.next:           #Mientras que no estemos en la cola del arreglo:
-//                     act=act.next  
-//                 point=act.next  
-//                 act.next=nodonuevo
-//                 nodonuevo.next=point
-//             else:
-//                 print("Add After > Ese valor no existe en la lista")
-
+    PopBack()
+    {
+        if(this.tail!=null && this.tail!=this.head)
+        {
+            let act=this.head;
+            while (act.next!=this.tail)
+            {
+                act=act.next;
+            }
+            let dato = this.tail.data;
+            act.next=null
+            this.tail=act;
+            this.size-=1;
+            return dato;
+        }
+        else
+        {
+            if(self.size>0)
+            {
+                this.head=null;
+                this.tail=null;
+                self.size-=1;
+                return dato;
+            }
+            return;
+        }
+    }
 }
