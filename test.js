@@ -46,7 +46,7 @@ function setup() {
 ////////////////////////////////////////////
     //Elementos DOM
     
-    titulo=createElement("h2","DSG4- The Data Structure of<br>                 Multiverse");
+    titulo=createElement("h2","DSG4- The Data Structure<br>of the Multiverse");
     titulo.position(ancho*0.013,alto*0.01);
     nombres=createElement("p","Santiago Reyes <br> Miguel Suárez <br> Nicolas Machado <br> Andrés Poveda");
     nombres.position(ancho*0.08,alto*0.1);
