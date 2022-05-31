@@ -154,6 +154,10 @@ class Multiverso {
         }
     }
 
+    BorrarUniverso(universo,mini) {
+        universo.conexiones.splice(mini,1);
+    }
+
     CrearConexion(ini, fin) {
         if (ini != fin) {
             if (ini.conexiones.length < this.max && fin.conexiones.length < this.max) {
@@ -165,6 +169,8 @@ class Multiverso {
             throw "Conexion no permtida";
         }
     }
+
+
 
     Print(col,sw,hov) {
         push();
