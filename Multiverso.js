@@ -6,7 +6,7 @@ class Universo {
         { x = random(70, ancho - 70),                    //Coordenada en x del nodo
             y = random(70, alto - 70),                   //Coordenada en y del nodo
             r = random(50, 100),                                //Radio del nodo
-            c = random(["blue", "yellow", "green", "black"]),      //Color del nodo
+            c = random(["blue", "yellow", "green", "black", "red"]),      //Color del nodo
             img = tst
         }) {
         //Data es un parametro obligatorio
@@ -111,7 +111,7 @@ class Universo {
                 }
             }
             if(multiverso.viaje.tail.data.conexiones.length==0){
-                viajerr.html("<i>Universo sin <br>      salida!</i>");
+                viajerr.html("<i>Has llegado a<br>tu destino!</i>");
             }
             text(multiverso.viaje.Print(),50,20);
         }
