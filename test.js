@@ -97,7 +97,7 @@ function setup() {
     test.CrearUniversoDependiente([test.independientes[0]], "Camino de\nconcreto", { x: ancho / 1.69, y: alto / 1.2, r: 50, c: "red"});
     test.CrearUniversoDependiente([test.independientes[0].conexiones[0]], "Restaurante", { x: ancho / 1.69, y: alto / 1.6, r: 40, c: "red"});
     test.CrearUniversoDependiente([test.independientes[0].conexiones[0]], "Chazas\nIng.", { x: ancho / 1.50, y: alto / 1.6, r: 50, c: "red"});
-    test.CrearUniversoDependiente([test.independientes[0].conexiones[0].conexiones[1]], "Diagonal", { x: ancho / 1.58, y: alto / 1.9, r: 50, c: "red"});
+    test.CrearUniversoDependiente([test.independientes[0].conexiones[0].conexiones[1]], "Diagonal", { x: ancho / 1.58, y: alto / 2.1, r: 50, c: "red"});
     test.CrearUniversoDependiente([test.independientes[0].conexiones[0].conexiones[0]], "Fac. de\nFarmaceutica.", { x: ancho / 1.8, y: alto / 1.9, r: 60, c: "green"});
     test.CrearUniversoDependiente([test.independientes[0].conexiones[0]], "Fac. de\nArtes", { x: ancho / 1.56, y: alto / 1.2, r: 60, c: "green"});
     test.CrearUniversoDependiente([test.independientes[0].conexiones[0].conexiones[0],test.independientes[0].conexiones[0].conexiones[1]], "Fac. de\nIngenieria", { x: ancho / 1.59, y: alto / 1.6, r: 60, c: "green"});
@@ -131,13 +131,13 @@ function setup() {
     test.CrearUniversoDependiente([test.independientes[3].conexiones[0]], "Cruce", { x: ancho / 2.15, y: alto / 2.6, r: 50, c: "red"});
     test.CrearUniversoDependiente([test.independientes[3].conexiones[0].conexiones[0]], "CyT", { x: ancho / 1.95, y: alto / 3.1, r: 60, c: "green"});
     test.CrearUniversoDependiente([test.independientes[3].conexiones[0].conexiones[0]], "Dept. de\nQuimica", { x: ancho / 1.95, y: alto / 2.1, r: 60, c: "green"});
-    test.CrearUniversoDependiente([test.independientes[3].conexiones[0].conexiones[0]], "Aulas de\nIngenieria", { x: ancho / 1.65, y: alto / 3.1, r: 60, c: "green"});
-    test.CrearUniversoDependiente([test.independientes[3].conexiones[0].conexiones[0].conexiones[2]], "Chazas\nQuimica", { x: ancho / 1.65, y: alto / 2.4, r: 50, c: "red"});
+    test.CrearUniversoDependiente([test.independientes[3].conexiones[0].conexiones[0]], "Chazas\nQuimica", { x: ancho / 1.65, y: alto / 2.4, r: 50, c: "red"});
+    test.CrearUniversoDependiente([test.independientes[3].conexiones[0].conexiones[0].conexiones[2]], "Aulas de\nIngenieria", { x: ancho / 1.65, y: alto / 3.1, r: 60, c: "green"});
     test.CrearConexion(test.independientes[3].conexiones[0],test.independientes[2].conexiones[0])
     test.CrearConexion(test.independientes[2].conexiones[0].conexiones[0],test.independientes[3].conexiones[0].conexiones[0])
-    test.CrearConexion(test.independientes[3].conexiones[0].conexiones[0],test.independientes[3].conexiones[0].conexiones[0].conexiones[2].conexiones[0])
-    test.CrearConexion(test.independientes[3].conexiones[0].conexiones[0].conexiones[2].conexiones[0],test.independientes[0].conexiones[0].conexiones[1])
     test.CrearConexion(test.independientes[0].conexiones[0].conexiones[1].conexiones[0],test.independientes[3].conexiones[0].conexiones[0].conexiones[1])
+    test.CrearConexion(test.independientes[3].conexiones[0].conexiones[0].conexiones[1],test.independientes[3].conexiones[0].conexiones[0].conexiones[2])
+    test.CrearConexion(test.independientes[3].conexiones[0].conexiones[0].conexiones[2],test.independientes[0].conexiones[0].conexiones[0])
 
     test.CrearUniversoDependiente([test.independientes[4]], "Cruce", { x: ancho / 2.15, y: alto / 1.36, r: 50, c: "red"});
     test.CrearUniversoDependiente([test.independientes[4].conexiones[0]], "Fac. de\nMedicina", { x: ancho / 2.3, y: alto / 1.55, r: 60, c: "green"});
@@ -145,6 +145,7 @@ function setup() {
     test.CrearConexion(test.independientes[4].conexiones[0].conexiones[1],test.independientes[0].conexiones[2])
     test.CrearConexion(test.independientes[0],test.independientes[4].conexiones[0])
     test.CrearConexion(test.independientes[3].conexiones[0].conexiones[0],test.independientes[4].conexiones[0].conexiones[0])
+    
     
     
 
