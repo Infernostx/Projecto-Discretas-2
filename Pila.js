@@ -19,7 +19,25 @@ class Pila extends ListaEnlazada{
     //En una pila solo podemos ingresar y sacar desde el frente. El ultimo que entra es el primero que sale (LIFO)
     //Metodos permitidos Super trae el mismo codigo de la clase padre
     constructor(){super();}
-    PushFront(data,x,y,r){super.PushFront(data,x,y,r);}
+    PushFront(data,x,y,r){
+        this.size+=1;
+        let nodonuevo = new Nodo(data,x,y,r);
+        if(this.head==null)
+        {
+            this.head=nodonuevo;
+            return;
+        }
+        nodonuevo.next=this.head;
+        this.head=nodonuevo;
+        /////
+        let act=this.head;
+        while (act.next!=null)
+        {
+            act=act.next;
+        }
+        this.tail=act;
+        return act.data;
+    }
     Empty(){super.Empty();}
     Print(){super.Print();}
     TopFront(){super.TopFront();}
