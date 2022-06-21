@@ -81,6 +81,7 @@ function setup() {
     visviaje=createElement("p","");
     visviaje.position(ancho*0.01,alto*0.25);
     finviaje = createButton('Finalizar viaje');
+    finviaje.classList.add('re-nav-link');
     finviaje.position(ancho*0.137,alto*0.35);
     finviaje.mouseClicked(FinViaje);
     viajerr=createElement("p","<i></i>");
