@@ -46,47 +46,9 @@ function setup() {
     viajerr=createElement("p","<i></i>");
     viajerr.position(ancho*0.13, alto*0.25);
 
-    //Crear Universo
-    crear=createElement("h4","Crear nuevo punto de referencia:");
-    crear.position(ancho*0.01,alto*0.37);
-    let inp = createInput('');
-    inp.position(ancho*0.08,alto*0.44);
-    inp.size(100);
-    inp.input(UniNuevo);
-
-    crearr=createElement("p","Esta unido a:");
-    crearr.position(ancho*0.01,alto*0.45);
-    sel = createSelect();
-    sel.position(ancho*0.1,alto*0.51);
-    sel.option('SSB');
-    sel.option('PAS');
-    sel.changed(UnivMadre);
-
-    CrearUni = createButton('Crear Punto');
-    CrearUni.position(ancho*0.137,alto*0.55);
-    CrearUni.mouseClicked(UniversoCreado);
-    
-    //Borrar Universo
-    crear=createElement("h4","Eliminar punto de referencia:");
-    crear.position(ancho*0.01,alto*0.58);
-
-    sel = createSelect();
-    sel.position(ancho*0.08,alto*0.65);
-    sel.option('--');
-    sel.option('Metal Gear');
-    sel.option('Persona 5');
-    sel.option('Sonic');
-    sel.option('Mario');
-    sel.option('Fire Emblem');
-    sel.option('TLOZ');
-    sel.changed(UniBorrar);
-    
-    DesUni = createButton('Borrar Punto');
-    DesUni.position(ancho*0.137,alto*0.70);
-    DesUni.mouseClicked(UniversoEliminado);
-
     //Incializacion del mapa
     test = new Multiverso(6);
+
     test.CrearUniversoIndependiente("Plaza\nChe", { x: ancho / 1.83, y: alto / 1.066, r: 80, c: 'blue'});
     test.CrearUniversoIndependiente("Entrada\nde la 30", { x: ancho / 1.28, y: alto / 1.066, r: 80, c: "blue"});
     test.CrearUniversoIndependiente("Entrada\nde la 53", { x: ancho / 1.25, y: alto / 12, r: 80, c: "blue"});
@@ -145,11 +107,6 @@ function setup() {
     test.CrearConexion(test.independientes[4].conexiones[0].conexiones[1],test.independientes[0].conexiones[2])
     test.CrearConexion(test.independientes[0],test.independientes[4].conexiones[0])
     test.CrearConexion(test.independientes[3].conexiones[0].conexiones[0],test.independientes[4].conexiones[0].conexiones[0])
-    
-    
-    
-
-    //test.BorrarUniverso(test.independientes[0],5);
 }
 
 function draw() {
@@ -164,38 +121,9 @@ function draw() {
     rect(10,10,windowWidth*0.22,windowHeight-10); 
     pop();
     test.VerHover_Multiverso();
-    test.Print("black",1,false);
+    test.Print("black",3,false);
     visviaje.html(test.viaje.Print());
     
-}
-
-//Crear Nuevo Universo
-function UniNuevo() {
-    UniNombre = this.value();
-  }
-function UnivMadre() {
-    let item = sel.value();
-    num = 1;
-    if (item=="SSB") {num=0}
-    else {num=1};
-}
-function UniversoCreado(){
-    test.CrearUniversoDependiente([test.independientes[num]], UniNombre, {c: "black"});
-}
-
-//Borrar Universo
-function UniBorrar(){
-    let item = sel.value();
-    Wanda = -1;
-    if (item=="Metal Gear") {Wanda = 0}
-    else if (item =="Persona 5") {Wanda = 1}
-    else if (item =="Sonic") {Wanda = 2}
-    else if (item =="Mario") {Wanda = 3}
-    else if (item =="Fire Emblem") {Wanda = 4}
-    else if (item =="TLOZ") {Wanda = 5};
-}
-function UniversoEliminado(){
-    test.BorrarUniverso(test.independientes[0], Wanda);
 }
 
 function SimularEsc(){

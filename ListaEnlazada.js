@@ -83,7 +83,7 @@ class ListaEnlazada
 //             return None
     Print()
     {
-        if(this.head!=null)
+        if(this.size!=0)
         {
             let txt="";
             let act=this.head;
@@ -97,11 +97,9 @@ class ListaEnlazada
             print(act.data.data+'-> null \n');
             return txt;
         }
-        else
-        {
-            print("El arreglo esta vacio");
-            return "Vacio";
-        }
+
+        print("El arreglo esta vacio");
+        return "Vacio";
     }
 
 //     def Find(self,data):                #El valor esta en la lista ? (V/F)

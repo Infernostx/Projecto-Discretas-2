@@ -64,7 +64,7 @@ class Universo {
         if (d < this.r / 2) {
             //Highlight de los caminos referentes al nodo
             //erase();
-            this.Print('purple',7,true);
+            this.Print('blue',9,true);
             //noErase()
         }
     }
@@ -83,35 +83,31 @@ class Universo {
         if (d<this.r/2){
             //Añadir el universo tocado a la lista de recorrido
             if(multiverso.viaje.size==0){
-                multiverso.viaje.PushBack(this);
+                multiverso.viaje.PushFront(this);
                 viajerr.html("<i></i>");
             }
             else if (multiverso.viaje.size==1){
                 if(multiverso.viaje.head.data!=this){
                     if(multiverso.viaje.head.data.conexiones.includes(this)){
-                        multiverso.viaje.PushBack(this);
+                        multiverso.viaje.PushFront(this);
                         viajerr.html("<i></i>");
                     }else{
-                        viajerr.html("<i>Los universos no<br>estan conectados!</i>");
+                        viajerr.html("<i>Los caminos no<br>estan conectados!</i>");
                     }
-                }else{
-                    viajerr.html("<i>No puedes viajar <br>al mismo universo!</i>");
                 }
             }
             else{
-                if(multiverso.viaje.tail.data!=this){
-                    if(multiverso.viaje.tail.data.conexiones.includes(this)){
-                        multiverso.viaje.PushBack(this);
+                if(multiverso.viaje.head.data!=this){
+                    if(multiverso.viaje.head.data.conexiones.includes(this)){
+                        multiverso.viaje.PushFront(this);
                         viajerr.html("<i></i>");
                     }else{
-                        viajerr.html("<i>Los universos no <br>estan conectados!</i>");
+                        viajerr.html("<i>Los caminos no <br>estan conectados!</i>");
                     }
-                }else{
-                    viajerr.html("<i>No puedes viajar <br>al mismo universo!</i>");
                 }
             }
-            if(multiverso.viaje.tail.data.conexiones.length==0){
-                viajerr.html("<i>Has llegado a<br>tu destino!</i>");
+            if(multiverso.viaje.head.data.conexiones.length==0){
+                viajerr.html("<i>Camino sin <br>      salida!</i>");
             }
             text(multiverso.viaje.Print(),50,20);
         }
@@ -131,7 +127,8 @@ class Multiverso {
         this.size=0;
         this.max=max_conexiones;
         //Variable usada para la simulacion de viaje
-        this.viaje = new ListaEnlazada();
+        this.escalas = new Cola();
+        this.viaje = new Pila();
     }
 
     //paramsvis hace referencia a los parametros del visualizador
@@ -169,8 +166,6 @@ class Multiverso {
             throw "Conexion no permtida";
         }
     }
-
-
 
     Print(col,sw,hov) {
         push();
@@ -229,7 +224,7 @@ class Multiverso {
         if(multiverso.viaje.size>0){
             switch(key){
                 case (27):
-                    alert("Has viajado a través de " + multiverso.viaje.size + " franquicias");
+                    alert("Has viajado un total de " + multiverso.distviaje(multiverso) + " metros");
                     delete (multiverso.viaje);
                     multiverso.viaje = new ListaEnlazada();
                     viajerr.html("<i></i>");
@@ -237,4 +232,23 @@ class Multiverso {
             }
     }
 }
+
+    distviaje(multiverso){
+        if(multiverso.viaje.size>=2)
+        {
+            let dista=0;
+            let act=multiverso.viaje.head;
+            while (act.next!=null)
+            {
+                dista+=dist(act.data.x,act.data.y,act.next.data.x,act.next.data.y);
+                act=act.next;
+            }
+            return map(dista,0,1000,0,100,1);
+        }
+        else
+        {
+            return "0";
+        }
+    }
+
 }

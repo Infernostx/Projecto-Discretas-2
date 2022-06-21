@@ -19,9 +19,49 @@ class Pila extends ListaEnlazada{
     //En una pila solo podemos ingresar y sacar desde el frente. El ultimo que entra es el primero que sale (LIFO)
     //Metodos permitidos Super trae el mismo codigo de la clase padre
     constructor(){super();}
-    PushFront(data,x,y,r){super.PushFront(data,x,y,r);}
+    PushBack(data,x,y,r)
+    {
+        this.size+=1;
+        let nodonuevo= new Nodo(data,x,y,r);
+
+        if(this.head==null)
+        {
+            this.head=nodonuevo;
+            return;
+        }
+        if(this.tail!=null)
+        {
+            this.tail.next=nodonuevo;
+            this.tail=nodonuevo;
+        }
+
+        else
+        {
+            this.head.next=nodonuevo;
+            this.tail=nodonuevo;
+        }
+    }
     Empty(){super.Empty();}
-    Print(){super.Print();}
+    Print()
+    {
+        if(this.size!=0)
+        {
+            let txt="";
+            let act=this.head;
+            while (act.next!=null)
+            {
+                print(act.data.data+' -> ');
+                txt+=act.data.data+"<br>";
+                act=act.next;
+            }
+            txt+=act.data.data;
+            print(act.data.data+'-> null \n');
+            return txt;
+        }
+
+        print("El arreglo esta vacio");
+        return "Vacio";
+    }
     TopFront(){super.TopFront();}
     PopFront(){super.PopFront();}
 
@@ -30,7 +70,7 @@ class Pila extends ListaEnlazada{
     Find(){throw 'Find no permitido en pilas';}    
     retN(){throw 'retN no permitido en pilas';}       
     Erase(){throw 'Erase no permitido en pilas';}    
-    PushBack(){throw 'PushBack no permitido en pilas';}    
+    PushFront(){throw 'Pushfront no permitido en pilas';}
     PopBack(){throw 'PopBack no permitido en pilas';}       
 
 }
