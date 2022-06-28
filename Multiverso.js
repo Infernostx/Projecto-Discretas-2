@@ -167,8 +167,6 @@ class Multiverso {
         }
     }
 
-
-
     Print(col,sw,hov) {
         push();
         for (let i = 0; i < this.independientes.length; i++) {
