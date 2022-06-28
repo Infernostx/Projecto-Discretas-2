@@ -4,7 +4,7 @@ class Vertice {
         {   x = random(70, ancho - 70),                             
             y = random(70, alto - 70),                              
             r = random(50, 100),                                    
-            c = random(["white", "yellow", "tomato"]),      
+            c = random(["white", "yellow", "tomato","red"]),      
             img = tst     // 1 - Si se quiere usar imagen por defecto cargar imagen transparente
         }) {
         //Parametro obligatorio
