@@ -5,6 +5,7 @@ class Vertice {
             y = random(70, alto - 70),                              
             r = random(50, 100),                                    
             c = random(["white", "yellow", "tomato","red"]),      
+            cod = ("Sin información adicional."),
             img = tst     // 1 - Si se quiere usar imagen por defecto cargar imagen transparente
         }) {
         //Parametro obligatorio
@@ -16,6 +17,7 @@ class Vertice {
         this.y = y;         //Coordenada en y del vertice
         this.r = r;         //Radio del vertice
         this.c = c;         //Color del vertice
+        this.cod = cod;     //info adicional del vertice
         this.img = img;     //Imagen asociada al vertice
     }
 0
@@ -64,6 +66,20 @@ class Vertice {
                 strokeWeight(2);
                 image(this.img, this.x - (this.r * 0.5), this.y - (this.r * 0.5), this.r * cos(2 * PI), this.r * sin(360), this.img.x, this.img.y);
                 text(this.data, this.x - (this.r * 0.350), this.y + (this.r * 0.0314));
+                pop();
+            
+            //Imprimir info del vertice
+                //push();
+                fill("gray");
+                stroke("black");
+                strokeWeight(3);
+                rect(this.x+(this.r/2)+15, this.y-100, 200,150);
+                fill('white');
+                textSize(15);
+                stroke('black');
+                strokeWeight(2);
+                text((this.data).replace(/[\n]/gm, ''),this.x+(this.r/2)+20,this.y-(75));
+                text(this.cod,this.x+(this.r/2)+20,this.y-(40));
                 pop();
             
         }
