@@ -21,7 +21,26 @@ class Cola extends ListaEnlazada{
     constructor(){super();}
     PushFront(data,x,y,r){super.PushFront(data,x,y,r);}
     Empty(){super.Empty();}
-    Print(){super.Print();}
+    Print()
+    {
+        if(this.size!=0)
+        {
+            let txt="";
+            let act=this.head;
+            while (act.next!=null)
+            {
+                print(act.data.data+' -> ');
+                txt+=act.data.data+"<br>";
+                act=act.next;
+            }
+            txt+=act.data.data;
+            print(act.data.data+'-> null \n');
+            return txt;
+        }
+
+        print("El arreglo esta vacio");
+        return "Vacio";
+    }
     TopBack(){super.TopBack();}
     PopBack(){super.PopBack();}
 
