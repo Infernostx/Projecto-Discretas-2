@@ -20,7 +20,6 @@ class Vertice {
         this.cod = cod;     //info adicional del vertice
         this.img = img;     //Imagen asociada al vertice
     }
-
     Hover(c,sw,grafo){
         let d = dist(mouseX, mouseY, this.x, this.y);
         if (d < this.r / 2) {

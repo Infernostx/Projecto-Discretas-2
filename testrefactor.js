@@ -23,6 +23,7 @@ let ini;
 let fin;
 let textini;
 let textfin;
+const materias = new hashTable;
 
 function preload() {
     soundFormats('mp3');
@@ -30,6 +31,25 @@ function preload() {
     bg = loadImage('media/bg1.png');
     bgm  = loadSound('media/Neco-Arc-sound-effect.mp3');
     
+}
+
+function IniViaje(){
+
+    if(ini && fin){
+        if (ini) textini.html("Inicio: "+ini.data);
+        else textini.html("Inicio: Vacio");
+        if (fin) textfin.html("Fin: "+fin.data);
+        else textfin.html("Fin: Vacio");
+
+        for (let id of test.Djikstra(ini.id, fin.id)){
+            recorrido.PushBack(test.vertices[id]);
+        }
+        ini=null;
+        fin=null;
+        bgm.play();
+    }else{
+        viajerr.html("<i>Selecciona Inicio<br>Y Fin!</i>");
+    }
 }
 
 function FinViaje(){
@@ -44,8 +64,13 @@ function FinViaje(){
     }else{
         alert("Recorrido Vacio!");
     }
-    
 }
+    
+ function nada (){
+    alert("nada");
+ }
+
+
 
 function mousePressed() {
     test.VerClicked();
@@ -82,17 +107,17 @@ function keyPressed(){
             recorrido = new Pila();
             break;
         case (13):  //Enter
-            if (ini) textini.html("Inicio: "+ini.data);
-            else textini.html("Inicio: Vacio");
-            if (fin) textfin.html("Fin: "+fin.data);
-            else textfin.html("Fin: Vacio");
-
             if(ini && fin){
+                if (ini) textini.html("Inicio: "+ini.data);
+                else textini.html("Inicio: Vacio");
+                if (fin) textfin.html("Fin: "+fin.data);
+                else textfin.html("Fin: Vacio");
                 for (let id of test.Djikstra(ini.id, fin.id)){
                     recorrido.PushBack(test.vertices[id]);
                 }
                 ini=null;
                 fin=null;
+                bgm.play();
             }else{
                 viajerr.html("<i>Selecciona Inicio<br>Y Fin!</i>");
             }
@@ -100,35 +125,123 @@ function keyPressed(){
     }
 }
 
+function crearElemento (texto, elemento, positionX, positionY) {
+    var o = document.createElement(elemento);
+    o.type = 'elemento';
+    o.innerText = texto;
+    o.style.position = "absolute";
+    o.style.left = positionX + 'px';
+    o.style.top = positionY + 'px';
+    //o.classList.add(clase);
+    document.body.appendChild(o);
+}
+
+function crearSpan ( wide, high, positionX, positionY) {
+    var o = document.createElement('div');
+    o.type = 'div';
+    o.style.position = "absolute";
+    o.style.left = positionX + 'px';
+    o.style.top = positionY + 'px';
+    o.style.width = wide + 'px';
+    o.style.height = high + 'px';
+    document.body.appendChild(o);
+}
+
+function crearBoton (funcion, texto, positionX, positionY, flag){
+    
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.innerText = texto;
+    button.style.position = "absolute";
+    button.style.left = positionX + 'px';
+    button.style.top = positionY + 'px';
+    button.classList.add("botones");
+    if (!flag) {
+        button.onclick = funcion;
+    }
+    document.body.appendChild(button);
+    return button;
+
+
+
+    /*var o=Document.getElementById("principal");
+	o.html+='<input type="button" value="'+texto+'" onclick="'+funcion+'" class="botones" style="position: absolute; left: '+positionX+'; top: '+positionY+'">';
+    */
+}
+
 function setup() {
-    ancho = windowWidth; 
+    ancho = windowWidth;
     alto = windowHeight;
     canvas = createCanvas(ancho, alto);
     canvas.position(0,0);
     background('gray');
 
     infoflag=true;
-    
     modorecorrido="m";
 
     ////////////////////////////////////////////
     //Elementos DOM
-    titulo=createElement("h2","Pathfinder de<br>Ingenieria y Ciencias.");
-    titulo.position(ancho*0.013,alto*0.01);
-    nombres=createElement("p","Santiago Reyes <br> Miguel Suárez <br> Nicolas Machado <br> Andrés Poveda");
-    nombres.position(ancho*0.08,alto*0.1);
+    crearSpan(400, 920, ancho*0.005, alto*0.005);
+    crearElemento("Pathfinder de", "h2", ancho*0.013,alto*0.01);
+    crearElemento("Ingenieria y Ciencias.", "h2", ancho*0.013,alto*0.04);
+
+    //titulo=createElement("h2","Pathfinder de<br>Ingenieria y Ciencias.");
+    //titulo.position(ancho*0.013,alto*0.01);
+
+
+    crearElemento("Santiago Reyes", "p", ancho*0.08, alto*0.1);
+    crearElemento("Miguel Suárez", "p", ancho*0.08, alto*0.12);
+    crearElemento("Nicolás Machado", "p", ancho*0.08, alto*0.14);
+    crearElemento("Andrés Poveda", "p", ancho*0.08, alto*0.16);
+
+    //Controles
+    crearElemento("M - Viaje Manual","p",20,alto-140);
+    crearElemento("I - Seleccionar Inicio","p",20,alto-120);
+    crearElemento("F - Seleccionar Fin","p",20,alto-100);
+    crearElemento("Con Inicio y Fin seleccionado, presiona Enter","p",20,alto-80);
+    crearElemento("O - Ocultar detalles (toggle)","p",20,alto-60);
+
+
+    //nombres=createElement("p","Santiago Reyes <br> Miguel Suárez <br> Nicolas Machado <br> Andrés Poveda");
+    //nombres.position(ancho*0.08,alto*0.1);
 
     //Viaje Actual
-    viaje=createElement("h3","Viaje actual");
-    viaje.position(ancho*0.01,alto*0.22);
+    crearElemento("Viaje actual", "h3", ancho*0.01, alto*0.22);
+
+    //viaje=createElement("h3","Viaje actual");
+    //viaje.position(ancho*0.01,alto*0.22);
+    
+    
     visviaje=createElement("p","");
     visviaje.position(ancho*0.01,alto*0.25);
-    finviaje = createButton('Finalizar viaje');
-    //finviaje.classList.add('re-nav-link');
+    crearBoton(FinViaje, "Finalizar viaje", ancho*0.137,alto*0.4);
+    crearBoton(IniViaje, "Buscar ruta", ancho*0.137,alto*0.35);
+    /*
+    finviaje = createButton('Finalizar viaje');   REEMPLAZADO POR INCOMPATIBLE CON CSS
     finviaje.position(ancho*0.137,alto*0.35);
     finviaje.mouseClicked(FinViaje);
+    */
+
+
+    //crearElemento("Mis clases", "h3", ancho*0.01, alto*0.45);
+    //materias = new hashTable();
+
+    //let bot = crearBoton(nada, "Añadir clase", ancho*0.137, alto*0.8, true);
+    //bot.onclick = materias.set();
+/*
+    arreglo = materiasgetall();
+    for (let index = 0; index < arreglo.length; index++) {
+        if (arreglo[index]) {
+            crearElemento(arreglo, "p", ancho*0.01, alto*0.5 + (index/20));
+        }
+    }
+*/
+    
+
+
     viajerr=createElement("p","<i></i>");
     viajerr.position(ancho*0.13, alto*0.25);
+
     modo=createElement("p","<i><b>Modo manual</b></i>");
     modo.position(ancho*0.14, alto*0.225);
 
@@ -137,8 +250,10 @@ function setup() {
     textfin=createElement("p","<i></i>");
     textfin.position(ancho*0.13, alto*0.27);
     
+
     recorrido= new Pila();
 
+    
     test= new Grafo();
     test.Insert(0,"Zona en \nObras",[],{x:ancho/1.395, y:alto/1.2,r:alto/4.2,c:'black',cod:"Espacio para la Facultad de\nArquitectura"});
     //alrededor de la Plaza
@@ -195,33 +310,17 @@ function setup() {
     test.Insert(3,"Camino",[8,14,2,1],{x:ancho/1.27, y:alto/1.9,r:alto/20,c:'tomato'});
 
     test.CalcularDists();
-
-    
 }
 
 function draw() {
-    ancho = windowWidth; 
+    ancho = windowWidth;
     largo = windowHeight;
     background(bg);
     push();
-    stroke("magenta");
-    strokeWeight(5);
-    fill("tomato");
-    rect(10,10,windowWidth*0.22,windowHeight-10); 
+    noFill();
+    noStroke();
+    rect(10,10,windowWidth*0.22,windowHeight-10);
     pop();
     test.Print("black",2,false);
-    visviaje.html(recorrido.Print());
-
-    push();
-    fill('white');
-    textSize(15);
-    stroke('black');
-    strokeWeight(2);
-    text("M - Viaje Manual",20,largo-100);
-    text("I - Seleccionar Inicio",20,largo-80);
-    text("F - Seleccionar Fin",20,largo-60);
-    text("Con Inicio y Fin seleccionado, presiona Enter",20,largo-40);
-    text("O - Ocultar detalles (toggle)",20,largo-20);
-    pop();
-    
+    visviaje.html(recorrido.Print());    
 }
