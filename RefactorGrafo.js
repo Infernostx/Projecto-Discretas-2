@@ -91,7 +91,7 @@ class Vertice {
     Clicked(grafo){
         let d = dist(mouseX,mouseY,this.x,this.y);
         if (d<this.r/2){
-            if(modorecorrido=="manual"){
+            if(modorecorrido=="m"){
                 //Añadir el universo tocado a la lista de recorrido
             text(recorrido.Print(),50,20);
             if(recorrido.size==0){
@@ -127,8 +127,19 @@ class Vertice {
                 viajerr.html("<i>Camino sin <br>      salida!</i>");
             }
             }
-            else if (modorecorrido="selini"){
-
+            else if (modorecorrido=="i"){
+                ini=this;
+                if (ini) textini.html("Inicio: "+ini.data);
+                else textini.html("Inicio: Vacio");
+                if (fin) textfin.html("Fin: "+fin.data);
+                else textfin.html("Fin: Vacio");
+            }
+            else if (modorecorrido=="f"){
+                fin=this;
+                if (ini) textini.html("Inicio: "+ini.data);
+                else textini.html("Inicio: Vacio");
+                if (fin) textfin.html("Fin: "+fin.data);
+                else textfin.html("Fin: Vacio");
             }
             
         }
@@ -270,7 +281,7 @@ class Grafo{
                 
                 path = [];
                 while(previous[smallest]) {
-                path.push(smallest);
+                path.push(int(smallest));
                 smallest = previous[smallest];
                 }
 
@@ -294,7 +305,7 @@ class Grafo{
             }
 
 
-            return path;
+            return path.concat([start]).reverse();
 
     }
 

@@ -12,6 +12,7 @@ let viaje;
 let visviaje;
 let finviaje;
 let viajerr;
+let modo;
 
 //
 
@@ -20,6 +21,8 @@ let modorecorrido;
 let recorrido;
 let ini;
 let fin;
+let textini;
+let textfin;
 
 function preload() {
     soundFormats('mp3');
@@ -30,11 +33,18 @@ function preload() {
 }
 
 function FinViaje(){
-    alert("Has viajado aproximadamente " + test.DistViaje(recorrido)*3.7 + " metros");
-    delete(recorrido);
-    recorrido = new Pila();
-    viajerr.html("<i></i>");
-    bgm.play();
+    if (recorrido.size!=0){
+        alert("Has viajado aproximadamente " + test.DistViaje(recorrido)*3.7 + " metros");
+        delete(recorrido);
+        recorrido = new Pila();
+        ini=null;
+        fin=null;
+        viajerr.html("<i></i>");
+        bgm.play();
+    }else{
+        alert("Recorrido Vacio!");
+    }
+    
 }
 
 function mousePressed() {
@@ -42,9 +52,50 @@ function mousePressed() {
 }
 function keyPressed(){
     switch(keyCode){
-        case (79):
+        case (79):  //O
             if(infoflag) infoflag=false;
             else infoflag=true;
+            break;
+        case (73):  //I
+            modorecorrido="i";
+            viajerr.html("");
+            delete(recorrido);
+            recorrido = new Pila();
+            modo.html("<i><b>Selecciona inicio</b></i>");
+            break;
+        case (70):  //F
+            modorecorrido="f";
+            viajerr.html("");
+            delete(recorrido);
+            recorrido = new Pila();
+            modo.html("<i><b>Selecciona fin</b></i>");
+            break;
+        case (84):  //T
+            break;
+        case (77):  //M
+            modorecorrido="m";
+            modo.html("<i><b>Modo manual</b></i>");
+            viajerr.html("");
+            textini.html("");
+            textfin.html("");
+            delete(recorrido);
+            recorrido = new Pila();
+            break;
+        case (13):  //Enter
+            if (ini) textini.html("Inicio: "+ini.data);
+            else textini.html("Inicio: Vacio");
+            if (fin) textfin.html("Fin: "+fin.data);
+            else textfin.html("Fin: Vacio");
+
+            if(ini && fin){
+                for (let id of test.Djikstra(ini.id, fin.id)){
+                    recorrido.PushBack(test.vertices[id]);
+                }
+                ini=null;
+                fin=null;
+            }else{
+                viajerr.html("<i>Selecciona Inicio<br>Y Fin!</i>");
+            }
             break;
     }
 }
@@ -57,7 +108,8 @@ function setup() {
     background('gray');
 
     infoflag=true;
-    modorecorrido="manual";
+    
+    modorecorrido="m";
 
     ////////////////////////////////////////////
     //Elementos DOM
@@ -77,6 +129,13 @@ function setup() {
     finviaje.mouseClicked(FinViaje);
     viajerr=createElement("p","<i></i>");
     viajerr.position(ancho*0.13, alto*0.25);
+    modo=createElement("p","<i><b>Modo manual</b></i>");
+    modo.position(ancho*0.14, alto*0.225);
+
+    textini=createElement("p","<i></i>");
+    textini.position(ancho*0.13, alto*0.25);
+    textfin=createElement("p","<i></i>");
+    textfin.position(ancho*0.13, alto*0.27);
     
     recorrido= new Pila();
 
@@ -137,7 +196,7 @@ function setup() {
 
     test.CalcularDists();
 
-    print(test.Djikstra(22, 16).concat(['22']).reverse());
+    
 }
 
 function draw() {
@@ -158,6 +217,10 @@ function draw() {
     textSize(15);
     stroke('black');
     strokeWeight(2);
+    text("M - Viaje Manual",20,largo-100);
+    text("I - Seleccionar Inicio",20,largo-80);
+    text("F - Seleccionar Fin",20,largo-60);
+    text("Con Inicio y Fin seleccionado, presiona Enter",20,largo-40);
     text("O - Ocultar detalles (toggle)",20,largo-20);
     pop();
     

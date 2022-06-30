@@ -55,7 +55,6 @@ class Pila extends ListaEnlazada{
                 act=act.next;
             }
             txt+=act.data.data;
-            print(act.data.data+'-> null \n');
             return txt;
         }
 
