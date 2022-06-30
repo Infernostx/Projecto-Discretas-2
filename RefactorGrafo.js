@@ -20,7 +20,7 @@ class Vertice {
         this.cod = cod;     //info adicional del vertice
         this.img = img;     //Imagen asociada al vertice
     }
-0
+
     Hover(c,sw,grafo){
         let d = dist(mouseX, mouseY, this.x, this.y);
         if (d < this.r / 2) {
@@ -69,7 +69,8 @@ class Vertice {
                 pop();
             
             //Imprimir info del vertice
-                //push();
+            if(infoflag){
+                push();
                 fill("gray");
                 stroke("black");
                 strokeWeight(3);
@@ -81,6 +82,8 @@ class Vertice {
                 text((this.data).replace(/[\n]/gm, ''),this.x+(this.r/2)+20,this.y-(75));
                 text(this.cod,this.x+(this.r/2)+20,this.y-(40));
                 pop();
+            }
+                
             
         }
     }
@@ -88,7 +91,8 @@ class Vertice {
     Clicked(grafo){
         let d = dist(mouseX,mouseY,this.x,this.y);
         if (d<this.r/2){
-            //Añadir el universo tocado a la lista de recorrido
+            if(modorecorrido=="manual"){
+                //Añadir el universo tocado a la lista de recorrido
             text(recorrido.Print(),50,20);
             if(recorrido.size==0){
                 recorrido.PushBack(this);
@@ -122,6 +126,11 @@ class Vertice {
             if(grafo.conexiones[recorrido.tail.data.id].size==0){
                 viajerr.html("<i>Camino sin <br>      salida!</i>");
             }
+            }
+            else if (modorecorrido="selini"){
+
+            }
+            
         }
     }
 }
@@ -230,6 +239,63 @@ class Grafo{
             {
                 return "0";
             }
+    }
+
+    Djikstra(start,finish){
+            var INFINITY = 1/0;
+            var nodes = new ColaPrio(),
+                distances = {},
+                previous = {},
+                path = [],
+                smallest, vertex, neighbor, alt;
+
+            for(vertex in this.distancias) {
+            if(vertex == start) {
+                distances[vertex] = 0;
+                nodes.enqueue(0, vertex);
+            }
+            else {
+                distances[vertex] = INFINITY;
+                nodes.enqueue(INFINITY, vertex);
+            }
+
+            previous[vertex] = null;
+            }
+
+            while(!nodes.isEmpty()) {
+            
+            smallest = nodes.dequeue();
+
+            if(smallest == finish) {
+                
+                path = [];
+                while(previous[smallest]) {
+                path.push(smallest);
+                smallest = previous[smallest];
+                }
+
+                break;
+            }
+
+            if(!smallest || distances[smallest] == INFINITY){
+                continue;
+            }
+
+            for(neighbor in this.distancias[smallest]) {
+                alt = distances[smallest] + this.distancias[smallest][neighbor];
+
+                if(alt < distances[neighbor]) {
+                distances[neighbor] = alt;
+                previous[neighbor] = smallest;
+
+                nodes.enqueue(alt, neighbor);
+                }
+            }
+            }
+
+
+            return path;
+
     }
 
 }

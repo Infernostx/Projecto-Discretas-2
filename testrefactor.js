@@ -15,7 +15,11 @@ let viajerr;
 
 //
 
+let infoflag;
+let modorecorrido;
 let recorrido;
+let ini;
+let fin;
 
 function preload() {
     soundFormats('mp3');
@@ -37,8 +41,10 @@ function mousePressed() {
     test.VerClicked();
 }
 function keyPressed(){
-    switch(key){
-        case (27):
+    switch(keyCode){
+        case (79):
+            if(infoflag) infoflag=false;
+            else infoflag=true;
             break;
     }
 }
@@ -49,7 +55,10 @@ function setup() {
     canvas = createCanvas(ancho, alto);
     canvas.position(0,0);
     background('gray');
-    
+
+    infoflag=true;
+    modorecorrido="manual";
+
     ////////////////////////////////////////////
     //Elementos DOM
     titulo=createElement("h2","Pathfinder de<br>Ingenieria y Ciencias.");
@@ -84,7 +93,7 @@ function setup() {
     test.Insert(6,"Fac. \nEconomia",[7],{x:ancho/1.2, y:alto/1.15,r:alto/15,c:'yellow',cod:"Facultad de Ciencias\nEconómicas.\n\nEdificio 310."});
     test.Insert(8,"Camino",[7,13,0,3],{x:ancho/1.25, y:alto/1.42,r:alto/20,c:'tomato'});
     //Entrada Cll. 53
-    test.Insert(4,"Cll. 53",[5,11,12,1],{x:ancho/1.3, y:alto/5.5,r:alto/10,c:'red',cod:"Entrada por la Calle 53.\nLleva al colegio IPERM."});
+    test.Insert(4,"Cll. 53",[5,11,12,1],{x:ancho/1.3, y:alto/5.5,r:alto/10,c:'red',cod:"Entrada por la Calle 53.\nLleva al colegio IPARM."});
     test.Insert(5,"Patios \nIng.",[4,11,15],{x:ancho/1.3, y:alto/2.8,r:alto/15,c:'yellow',cod:"Postgrados en Materiales y\nProcesos de Manufactura.\n\nEdificio 407."});
     test.Insert(11,"Camino",[4,5,12,15,29],{x:ancho/1.42, y:alto/3.9,r:alto/20,c:'tomato'});
     test.Insert(12,"Observatorio",[4,11],{x:ancho/1.43, y:alto/5.5,r:alto/15,c:'yellow',cod:"Observatorio Atronómico.\n\nEdificio 413."});
@@ -127,6 +136,8 @@ function setup() {
     test.Insert(3,"Camino",[8,14,2,1],{x:ancho/1.27, y:alto/1.9,r:alto/20,c:'tomato'});
 
     test.CalcularDists();
+
+    print(test.Djikstra(22, 16).concat(['22']).reverse());
 }
 
 function draw() {
@@ -142,4 +153,12 @@ function draw() {
     test.Print("black",2,false);
     visviaje.html(recorrido.Print());
 
+    push();
+    fill('white');
+    textSize(15);
+    stroke('black');
+    strokeWeight(2);
+    text("O - Ocultar detalles (toggle)",20,largo-20);
+    pop();
+    
 }
