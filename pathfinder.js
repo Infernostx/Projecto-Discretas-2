@@ -35,4 +35,5 @@ while(heap.size!=0){
             }
         }
     }
+    return vactual.distancia;
 }
