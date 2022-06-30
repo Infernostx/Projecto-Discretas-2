@@ -181,7 +181,7 @@ function setup() {
 
     ////////////////////////////////////////////
     //Elementos DOM
-    crearSpan(400, 920, ancho*0.005, alto*0.005);
+    crearSpan(ancho*0.25, alto-20, ancho*0.005, alto*0.005);
     crearElemento("Pathfinder de", "h2", ancho*0.013,alto*0.01);
     crearElemento("Ingenieria y Ciencias.", "h2", ancho*0.013,alto*0.04);
 
