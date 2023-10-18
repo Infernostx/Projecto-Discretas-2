@@ -1,6 +1,6 @@
 let test;
 let img;
-let bgm;
+//let bgm;
 let bg;
 let ancho,alto;
 
@@ -29,7 +29,7 @@ function preload() {
     soundFormats('mp3');
     tst = loadImage('media/tst.png');
     bg = loadImage('media/bg1.png');
-    bgm  = loadSound('media/Neco-Arc-sound-effect.mp3');
+   // bgm  = loadSound('media/Neco-Arc-sound-effect.mp3');
     
 }
 
@@ -46,7 +46,7 @@ function IniViaje(){
         }
         ini=null;
         fin=null;
-        bgm.play();
+        //bgm.play();
     }else{
         viajerr.html("<i>Selecciona Inicio<br>Y Fin!</i>");
     }
@@ -60,7 +60,7 @@ function FinViaje(){
         ini=null;
         fin=null;
         viajerr.html("<i></i>");
-        bgm.play();
+        //bgm.play();
     }else{
         alert("Recorrido Vacio!");
     }
@@ -117,7 +117,7 @@ function keyPressed(){
                 }
                 ini=null;
                 fin=null;
-                bgm.play();
+                //bgm.play();
             }else{
                 viajerr.html("<i>Selecciona Inicio<br>Y Fin!</i>");
             }
