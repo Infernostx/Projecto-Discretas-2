@@ -7,7 +7,7 @@ class Vertice {
             c = random(["white", "yellow", "tomato","red"]),      
             cod = ("Sin información adicional."),
             img = tst     // 1 - Si se quiere usar imagen por defecto cargar imagen transparente
-            vel = 0;
+            //vel = 0;
         }) {
         //Parametro obligatorio
         this.id=id;
