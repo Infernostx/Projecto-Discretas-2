@@ -202,7 +202,7 @@ function setup() {
     crearElemento("O - Ocultar detalles (toggle)","p",20,alto-60);
 
 
-    //nombres=createElement("p","Santiago Reyes <br> Miguel Suárez <br> Nicolas Machado <br> Andrés Poveda");
+    //nombres=createElement("p","Miguel Suárez <br>  <br>  <br> ");
     //nombres.position(ancho*0.08,alto*0.1);
 
     //Viaje Actual
