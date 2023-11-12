@@ -7,12 +7,14 @@ class Vertice {
             c = random(["white", "yellow", "tomato","red"]),      
             cod = ("Sin información adicional."),
             img = tst     // 1 - Si se quiere usar imagen por defecto cargar imagen transparente
-            //tiempo = 0;
-        }) {
+            
+        }
+        //,tiempo
+        ) {
         //Parametro obligatorio
         this.id=id;
         this.data = data;   //Nombre / valor 
-
+        //this.tiempo = tiempo;
         //Parametros visuales opcionales
         this.x = x;         //Coordenada en x del vertice
         this.y = y;         //Coordenada en y del vertice
