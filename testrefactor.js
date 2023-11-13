@@ -52,20 +52,48 @@ function IniViaje(){
     }
 }
 
-function FinViaje(){
-    if (recorrido.size!=0){
-        alert("Has viajado aproximadamente " + test.DistViaje(recorrido)*3.7 + " metros");
-        delete(recorrido);
+async function FinViaje() {
+    if (recorrido.size != 0) {
+        try {
+            // Obtener el pronóstico del tiempo usando la API de OpenWeatherMap
+            const clima = await obtenerPronosticoDelTiempo();
+
+            alert("Has viajado aproximadamente " + test.DistViaje(recorrido) * 3.7 + " metros.\n" +
+                "El clima actual es: " + clima);
+        } catch (error) {
+            console.error("Error al obtener el pronóstico del tiempo:", error);
+            alert("Ha ocurrido un error al obtener el pronóstico del tiempo.");
+        }
+
+        delete recorrido;
         recorrido = new Pila();
-        ini=null;
-        fin=null;
+        ini = null;
+        fin = null;
         viajerr.html("<i></i>");
         //bgm.play();
-    }else{
-        alert("Recorrido Vacio!");
+    } else {
+        alert("Recorrido Vacío!");
     }
 }
-    
+
+// Función para obtener el pronóstico del tiempo desde OpenWeatherMap
+function obtenerPronosticoDelTiempo() {
+    // Aquí deberías reemplazar 'TU_API_KEY' con tu clave de API de OpenWeatherMap
+    const apiKey = 'da51eeba08198cb1d7759b7d1ab109cc';
+    const ciudad = 'Bogota';
+    const lang = 'es'; // Agrega el parámetro lang=es para obtener la información en español
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&lang=${lang}&appid=${apiKey}`;
+
+    return fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            // Puedes personalizar este bloque para obtener la información específica del clima que necesitas
+            const descripcionClima = data.weather[0].description;
+            const temperatura = data.main.temp-273.15;
+
+            return `Clima: ${descripcionClima}, Temperatura: ${temperatura}°C`;
+        });
+}   
  function nada (){
     alert("nada");
  }
