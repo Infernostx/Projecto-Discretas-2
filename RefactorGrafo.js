@@ -1,3 +1,4 @@
+
 class Vertice {
     constructor(
         id,data,
@@ -213,17 +214,27 @@ class Grafo{
     }
 
     CalcularDists(){
+        
         //Distancias es un diccionario de diccionarios, el diccionario correspondiente al ID del vertice de inicio
         //Contiene como llaves las IDS de los diccionarios a los que va conectado, y como valor la distancia de la arista que los une.
+        // Leer el valor de la cookie "miVariableDeSesion"
+        let cookies = document.cookie.split("; ");
+        
+        
         for (let id in this.conexiones){
             //La key de conexiones es el Id del nodo inicial
             let vertinicio=this.vertices[id];
             let distanciasid={};
+            //console.log("hola"+clima2);
             //this.conexiones[id] corresponde al set donde estan las conexiones de ese nodo inicial
+            console.log("clima"+cookies[1]);
             for (let idconexion of this.conexiones[id]){
                 if(idconexion in this.vertices){        //Solo hago la conexion si el nodo al que hago referencia existe
                     let vertfin=this.vertices[idconexion];
                     let distancia = dist(vertinicio.x,vertinicio.y,vertfin.x,vertfin.y);
+                    if (vertinicio.id==4 && vertfin.id==12 && (cookies[1].includes("lluvia") || cookies[1].includes("tormenta"))){
+                        distancia=distancia*10;
+                    }
                     distanciasid[idconexion]=distancia; 
                 }else{
                     print(id+": el vertice "+idconexion+ " no existe! Ignorando conexion");
