@@ -3,7 +3,7 @@ let img;
 //let bgm;
 let bg;
 let ancho,alto;
-
+let clima2;
 //Elementos DOM
 let canvas;
 let titulo;
@@ -58,8 +58,9 @@ async function FinViaje() {
             // Obtener el pronóstico del tiempo usando la API de OpenWeatherMap
             const clima = await obtenerPronosticoDelTiempo();
 
-            alert("Has viajado aproximadamente " + test.DistViaje(recorrido) * 3.7 + " metros.\n" +
-                "El clima actual es: " + clima);
+            alert("Has viajado aproximadamente " + test.DistViaje(recorrido) * 3.7 + " metros.\n" + clima);
+            document.cookie="clima=" + clima;
+            
         } catch (error) {
             console.error("Error al obtener el pronóstico del tiempo:", error);
             alert("Ha ocurrido un error al obtener el pronóstico del tiempo.");
@@ -93,7 +94,8 @@ function obtenerPronosticoDelTiempo() {
 
             return `Clima: ${descripcionClima}, Temperatura: ${temperatura}°C`;
         });
-}   
+}
+    
  function nada (){
     alert("nada");
  }
