@@ -1,4 +1,3 @@
-
 class Vertice {
     constructor(
         id,data,
@@ -218,22 +217,46 @@ class Grafo{
         //Distancias es un diccionario de diccionarios, el diccionario correspondiente al ID del vertice de inicio
         //Contiene como llaves las IDS de los diccionarios a los que va conectado, y como valor la distancia de la arista que los une.
         // Leer el valor de la cookie "miVariableDeSesion"
-        let cookies = document.cookie.split("; ");
+        const apiKey = 'da51eeba08198cb1d7759b7d1ab109cc';
+        const ciudad = 'Bogota';
+        const lang = 'es'; // Agrega el parámetro lang=es para obtener la información en español
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=${ciudad}&lang=${lang}&appid=${apiKey}`;
+        let descripcionClima = "";
+        let temperatura = 0;
         
+        async function obtenerPronosticoDelTiempo ()  {
+            return fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    descripcionClima = data.weather[0].description;
+                    temperatura = data.main.temp - 273.15;
+                    console.log("data: " + descripcionClima);
         
+                    // Retorna un objeto con los valores que deseas almacenar globalmente
+                    return { descripcionClima, temperatura };
+                });
+        };
+        
+        // Ejemplo de uso
+        obtenerPronosticoDelTiempo().then(resultado => {
+            // Puedes acceder a los valores almacenados globalmente
+
+        
+            
         for (let id in this.conexiones){
+
             //La key de conexiones es el Id del nodo inicial
             let vertinicio=this.vertices[id];
             let distanciasid={};
             //console.log("hola"+clima2);
             //this.conexiones[id] corresponde al set donde estan las conexiones de ese nodo inicial
-            console.log("clima"+cookies[1]);
             for (let idconexion of this.conexiones[id]){
                 if(idconexion in this.vertices){        //Solo hago la conexion si el nodo al que hago referencia existe
                     let vertfin=this.vertices[idconexion];
                     let distancia = dist(vertinicio.x,vertinicio.y,vertfin.x,vertfin.y);
-                    if (vertinicio.id==4 && vertfin.id==12 && (cookies[1].includes("lluvia") || cookies[1].includes("tormenta"))){
+                    if ((vertinicio.id==21 || vertfin.id==21) && (descripcionClima.includes("lluvia") || descripcionClima.includes("tormenta"))){
                         distancia=distancia*10;
+                        console.log("hola"+distancia);
                     }
                     distanciasid[idconexion]=distancia; 
                 }else{
@@ -242,21 +265,28 @@ class Grafo{
             }
             this.distancias[id]=distanciasid;     //Añadir el arreglo con los detalles de las distancias 
         }
+    });
     }
 
     DistViaje(recorrido){
+        
         if(recorrido.size>=2)
             {
                 let dista=0;
                 let act=recorrido.head;
+                
                 while (act.next!=null)
                 {
                     let actid=act.data.id;
                     let nextid=act.next.data.id;
+                    console.log("distviaje.");
+                
+                
                     dista+=this.distancias[actid][nextid];
                     act=act.next;
-                }
+                } 
                 dista=int(dista*0.2);
+                
                 return dista;
             }
             else
