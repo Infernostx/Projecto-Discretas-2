@@ -3,7 +3,7 @@ let img;
 //let bgm;
 let bg;
 let ancho,alto;
-let clima2;
+
 //Elementos DOM
 let canvas;
 let titulo;
@@ -53,25 +53,26 @@ function IniViaje(){
 }
 
 async function FinViaje() {
-    if (recorrido.size != 0) {
+    if (recorrido.size !== 0) {
         try {
             // Obtener el pronóstico del tiempo usando la API de OpenWeatherMap
             const clima = await obtenerPronosticoDelTiempo();
-
+            console.log("clima fin del viaje "+ clima);
+            console.log("finviaje."+ recorrido);
             alert("Has viajado aproximadamente " + test.DistViaje(recorrido) * 3.7 + " metros.\n" + clima);
-            document.cookie="clima=" + clima;
-            
+
         } catch (error) {
             console.error("Error al obtener el pronóstico del tiempo:", error);
-            alert("Ha ocurrido un error al obtener el pronóstico del tiempo.");
+            alert("Ha ocurrido un error al obtener el pronóstico del tiempo.", error);
+        } finally {
+            // Restablecer recorrido y otras variables después del try-catch
+            delete recorrido;
+            recorrido = new Pila();
+            ini = null;
+            fin = null;
+            viajerr.html("<i></i>");
+            //bgm.play();
         }
-
-        delete recorrido;
-        recorrido = new Pila();
-        ini = null;
-        fin = null;
-        viajerr.html("<i></i>");
-        //bgm.play();
     } else {
         alert("Recorrido Vacío!");
     }
@@ -94,8 +95,7 @@ function obtenerPronosticoDelTiempo() {
 
             return `Clima: ${descripcionClima}, Temperatura: ${temperatura}°C`;
         });
-}
-    
+}   
  function nada (){
     alert("nada");
  }
