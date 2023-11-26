@@ -219,10 +219,11 @@ function setup() {
     //titulo.position(ancho*0.013,alto*0.01);
 
 
-    //crearElemento("", "p", ancho*0.08, alto*0.12);
     crearElemento("Miguel Suárez", "p", ancho*0.08, alto*0.1);
-    //crearElemento("", "p", ancho*0.08, alto*0.14);
-    //crearElemento("", "p", ancho*0.08, alto*0.16);
+    crearElemento("Andres Borda", "p", ancho*0.08, alto*0.12);
+    crearElemento("Jhonatan Forero", "p", ancho*0.08, alto*0.14);
+    crearElemento("Juan Manuel Torres", "p", ancho*0.08, alto*0.16);
+    crearElemento("Breiner Lopez", "p", ancho*0.08, alto*0.18);
 
     //Controles
     crearElemento("M - Viaje Manual","p",20,alto-140);
